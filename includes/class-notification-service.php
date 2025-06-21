@@ -590,7 +590,7 @@ class WPSI_Notification_Service {
      */
     public function send_test_email() {
         $subject = get_option('wpsi_email_subject_prefix', '[Smart Insights]') . ' Test Email';
-        $message = "This is a test email from WP Smart Insights plugin.\n\n";
+        $message = "This is a test email from Smart Insights plugin.\n\n";
         $message .= "If you received this email, your email configuration is working correctly.\n\n";
         $message .= "Sent at: " . current_time('mysql') . "\n";
         $message .= "Site: " . get_site_url();

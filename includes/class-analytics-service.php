@@ -407,7 +407,7 @@ class WPSI_Analytics_Service {
         
         $test_data = array(
             'event_type' => 'test',
-            'event_data' => json_encode(array('message' => 'Test webhook from WP Smart Insights')),
+            'event_data' => json_encode(array('message' => 'Test webhook from Smart Insights')),
             'post_id' => 0,
             'timestamp' => current_time('mysql'),
             'site_url' => get_site_url(),

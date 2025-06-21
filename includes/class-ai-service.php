@@ -411,7 +411,7 @@ class WPSI_AI_Service {
                 'messages' => array(
                     array(
                         'role' => 'user',
-                        'content' => 'Hello, this is a test message from WP Smart Insights plugin.'
+                        'content' => 'Hello, this is a test message from Smart Insights plugin.'
                     )
                 ),
                 'max_tokens' => 50,

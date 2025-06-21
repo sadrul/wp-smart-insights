@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Smart Insights – Content Intelligence & UX Heatmap
+ * Plugin Name: Smart Insights – Content Intelligence & UX Heatmap
  * Plugin URI: https://github.com/sadrul/wp-smart-insights
  * Description: A comprehensive WordPress plugin that combines AI-driven content analysis, user engagement heatmaps, and SEO scoring in one dashboard to help site owners optimize content quality and user experience.
  * Version: 1.0.0

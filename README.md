@@ -1,4 +1,4 @@
-# WP Smart Insights – Content Intelligence & UX Heatmap
+# Smart Insights – Content Intelligence & UX Heatmap
 
 A comprehensive WordPress plugin that combines AI-driven content analysis, user engagement heatmaps, and SEO scoring in one dashboard to help site owners optimize content quality and user experience.
 
@@ -246,4 +246,4 @@ We welcome contributions! Please see our [Contributing Guidelines](https://githu
 
 ---
 
-**WP Smart Insights** - Making WordPress content optimization smarter and more privacy-focused. 
+**Smart Insights** - Making WordPress content optimization smarter and more privacy-focused. 
