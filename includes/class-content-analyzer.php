@@ -19,7 +19,7 @@ class WPSI_Content_Analyzer {
     public function add_content_analysis_meta_box() {
         add_meta_box(
             'wpsi-content-analysis',
-            __('Smart Insights - Content Analysis', 'wp-smart-insights'),
+            __('Smart Insights - Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
             array($this, 'render_meta_box'),
             'post',
             'side',
@@ -28,7 +28,7 @@ class WPSI_Content_Analyzer {
         
         add_meta_box(
             'wpsi-content-analysis',
-            __('Smart Insights - Content Analysis', 'wp-smart-insights'),
+            __('Smart Insights - Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
             array($this, 'render_meta_box'),
             'page',
             'side',
@@ -46,15 +46,15 @@ class WPSI_Content_Analyzer {
         if ($analysis) {
             $this->display_analysis_results($analysis);
         } else {
-            echo '<p>' . __('No analysis available. Click "Analyze Content" to get started.', 'wp-smart-insights') . '</p>';
+            echo '<p>' . __('No analysis available. Click "Analyze Content" to get started.', 'smart-insights-content-intelligence-ux-heatmap') . '</p>';
         }
         
         echo '<button type="button" id="wpsi-analyze-content" class="button button-primary">';
-        echo __('Analyze Content', 'wp-smart-insights');
+        echo __('Analyze Content', 'smart-insights-content-intelligence-ux-heatmap');
         echo '</button>';
         
         echo '<div id="wpsi-analysis-loading" style="display: none;">';
-        echo '<p>' . __('Analyzing content...', 'wp-smart-insights') . '</p>';
+        echo '<p>' . __('Analyzing content...', 'smart-insights-content-intelligence-ux-heatmap') . '</p>';
         echo '</div>';
         
         echo '</div>';
@@ -66,7 +66,7 @@ class WPSI_Content_Analyzer {
         // Overall Score
         if (isset($analysis['overall_score'])) {
             echo '<div class="wpsi-score-section">';
-            echo '<h4>' . __('Overall Content Score', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Overall Content Score', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-score-circle" data-score="' . esc_attr($analysis['overall_score']) . '">';
             echo '<span class="wpsi-score-number">' . esc_html($analysis['overall_score']) . '</span>';
             echo '<span class="wpsi-score-label">/100</span>';
@@ -77,7 +77,7 @@ class WPSI_Content_Analyzer {
         // Readability
         if (isset($analysis['readability'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Readability', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Readability', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-metric-bar">';
             echo '<div class="wpsi-metric-fill" style="width: ' . esc_attr($analysis['readability']['score']) . '%"></div>';
             echo '</div>';
@@ -95,7 +95,7 @@ class WPSI_Content_Analyzer {
         // Sentiment
         if (isset($analysis['sentiment'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Sentiment', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Sentiment', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-sentiment-indicator ' . esc_attr($analysis['sentiment']['type']) . '">';
             echo esc_html($analysis['sentiment']['label']);
             echo '</div>';
@@ -106,7 +106,7 @@ class WPSI_Content_Analyzer {
         // Tone
         if (isset($analysis['tone'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Tone', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Tone', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-tone-tags">';
             foreach ($analysis['tone']['tags'] as $tag) {
                 echo '<span class="wpsi-tone-tag">' . esc_html($tag) . '</span>';
@@ -118,9 +118,9 @@ class WPSI_Content_Analyzer {
         // Keyword Analysis
         if (isset($analysis['keywords'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Keyword Analysis', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Keyword Analysis', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-keyword-density">';
-            echo '<p>' . __('Density: ', 'wp-smart-insights') . esc_html($analysis['keywords']['density']) . '%</p>';
+            echo '<p>' . __('Density: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['keywords']['density']) . '%</p>';
             if (!empty($analysis['keywords']['suggestions'])) {
                 echo '<ul class="wpsi-suggestions">';
                 foreach ($analysis['keywords']['suggestions'] as $suggestion) {
@@ -135,7 +135,7 @@ class WPSI_Content_Analyzer {
         // Repetition & Fluff
         if (isset($analysis['repetition'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Repetition & Fluff', 'wp-smart-insights') . '</h4>';
+            echo '<h4>' . __('Repetition & Fluff', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
             echo '<div class="wpsi-repetition-score">';
             echo '<div class="wpsi-metric-bar">';
             echo '<div class="wpsi-metric-fill" style="width: ' . esc_attr($analysis['repetition']['score']) . '%"></div>';
@@ -199,10 +199,10 @@ class WPSI_Content_Analyzer {
         // Suggestions
         $suggestions = array();
         if ($flesch_score < 60) {
-            $suggestions[] = __('Consider using shorter sentences and simpler words', 'wp-smart-insights');
+            $suggestions[] = __('Consider using shorter sentences and simpler words', 'smart-insights-content-intelligence-ux-heatmap');
         }
         if (count($sentences) < 5) {
-            $suggestions[] = __('Add more sentences to improve flow', 'wp-smart-insights');
+            $suggestions[] = __('Add more sentences to improve flow', 'smart-insights-content-intelligence-ux-heatmap');
         }
         
         return array(
@@ -257,18 +257,18 @@ class WPSI_Content_Analyzer {
         
         if ($sentiment_ratio > 0.02) {
             $type = 'positive';
-            $label = __('Positive', 'wp-smart-insights');
-            $description = __('Content has a positive tone', 'wp-smart-insights');
+            $label = __('Positive', 'smart-insights-content-intelligence-ux-heatmap');
+            $description = __('Content has a positive tone', 'smart-insights-content-intelligence-ux-heatmap');
             $score = min(100, 50 + ($sentiment_ratio * 1000));
         } elseif ($sentiment_ratio < -0.02) {
             $type = 'negative';
-            $label = __('Negative', 'wp-smart-insights');
-            $description = __('Content has a negative tone', 'wp-smart-insights');
+            $label = __('Negative', 'smart-insights-content-intelligence-ux-heatmap');
+            $description = __('Content has a negative tone', 'smart-insights-content-intelligence-ux-heatmap');
             $score = max(0, 50 + ($sentiment_ratio * 1000));
         } else {
             $type = 'neutral';
-            $label = __('Neutral', 'wp-smart-insights');
-            $description = __('Content has a neutral tone', 'wp-smart-insights');
+            $label = __('Neutral', 'smart-insights-content-intelligence-ux-heatmap');
+            $description = __('Content has a neutral tone', 'smart-insights-content-intelligence-ux-heatmap');
             $score = 50;
         }
         
@@ -334,9 +334,9 @@ class WPSI_Content_Analyzer {
         // Suggestions
         $suggestions = array();
         if ($density < 1) {
-            $suggestions[] = __('Consider adding more relevant keywords', 'wp-smart-insights');
+            $suggestions[] = __('Consider adding more relevant keywords', 'smart-insights-content-intelligence-ux-heatmap');
         } elseif ($density > 5) {
-            $suggestions[] = __('Keyword density might be too high - consider natural variation', 'wp-smart-insights');
+            $suggestions[] = __('Keyword density might be too high - consider natural variation', 'smart-insights-content-intelligence-ux-heatmap');
         }
         
         $score = max(0, min(100, 100 - abs($density - 2.5) * 20));
@@ -366,14 +366,14 @@ class WPSI_Content_Analyzer {
         
         $issues = array();
         if (!empty($repeated_words)) {
-            $issues[] = __('Some words are repeated frequently', 'wp-smart-insights');
+            $issues[] = __('Some words are repeated frequently', 'smart-insights-content-intelligence-ux-heatmap');
         }
         
         if ($repetition_ratio > 0.1) {
-            $issues[] = __('Consider using synonyms to reduce repetition', 'wp-smart-insights');
+            $issues[] = __('Consider using synonyms to reduce repetition', 'smart-insights-content-intelligence-ux-heatmap');
         }
         
-        $description = $repetition_ratio < 0.05 ? __('Good variety in word choice', 'wp-smart-insights') : __('Some repetition detected', 'wp-smart-insights');
+        $description = $repetition_ratio < 0.05 ? __('Good variety in word choice', 'smart-insights-content-intelligence-ux-heatmap') : __('Some repetition detected', 'smart-insights-content-intelligence-ux-heatmap');
         
         return array(
             'score' => round($score),

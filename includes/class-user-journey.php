@@ -260,9 +260,9 @@ class WPSI_User_Journey {
         if ($stats['completion_rate'] < 50) {
             $insights[] = array(
                 'type' => 'warning',
-                'title' => __('Low Completion Rate', 'wp-smart-insights'),
-                'message' => sprintf(__('Only %s%% of users complete their journey on this page.', 'wp-smart-insights'), $stats['completion_rate']),
-                'suggestion' => __('Consider improving content engagement or reducing page length.', 'wp-smart-insights')
+                'title' => __('Low Completion Rate', 'smart-insights-content-intelligence-ux-heatmap'),
+                'message' => sprintf(__('Only %s%% of users complete their journey on this page.', 'smart-insights-content-intelligence-ux-heatmap'), $stats['completion_rate']),
+                'suggestion' => __('Consider improving content engagement or reducing page length.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         
@@ -270,9 +270,9 @@ class WPSI_User_Journey {
         if ($stats['avg_duration'] < 30) {
             $insights[] = array(
                 'type' => 'info',
-                'title' => __('Quick Bounces', 'wp-smart-insights'),
-                'message' => sprintf(__('Users spend an average of %s seconds on this page.', 'wp-smart-insights'), $stats['avg_duration']),
-                'suggestion' => __('Consider improving the first impression or adding more engaging content.', 'wp-smart-insights')
+                'title' => __('Quick Bounces', 'smart-insights-content-intelligence-ux-heatmap'),
+                'message' => sprintf(__('Users spend an average of %s seconds on this page.', 'smart-insights-content-intelligence-ux-heatmap'), $stats['avg_duration']),
+                'suggestion' => __('Consider improving the first impression or adding more engaging content.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         
@@ -280,9 +280,9 @@ class WPSI_User_Journey {
         if ($stats['avg_events'] > 50 && $stats['completion_rate'] < 70) {
             $insights[] = array(
                 'type' => 'info',
-                'title' => __('High Interaction, Low Completion', 'wp-smart-insights'),
-                'message' => __('Users are interacting but not completing their journey.', 'wp-smart-insights'),
-                'suggestion' => __('Consider simplifying the user flow or adding clearer calls-to-action.', 'wp-smart-insights')
+                'title' => __('High Interaction, Low Completion', 'smart-insights-content-intelligence-ux-heatmap'),
+                'message' => __('Users are interacting but not completing their journey.', 'smart-insights-content-intelligence-ux-heatmap'),
+                'suggestion' => __('Consider simplifying the user flow or adding clearer calls-to-action.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         
@@ -356,11 +356,11 @@ class WPSI_User_Journey {
         ?>
         <div class="wpsi-journey-player">
             <div class="wpsi-player-controls">
-                <button type="button" class="button" id="wpsi-play-journey"><?php _e('Play Journey', 'wp-smart-insights'); ?></button>
-                <button type="button" class="button" id="wpsi-pause-journey"><?php _e('Pause', 'wp-smart-insights'); ?></button>
-                <button type="button" class="button" id="wpsi-reset-journey"><?php _e('Reset', 'wp-smart-insights'); ?></button>
+                <button type="button" class="button" id="wpsi-play-journey"><?php _e('Play Journey', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                <button type="button" class="button" id="wpsi-pause-journey"><?php _e('Pause', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                <button type="button" class="button" id="wpsi-reset-journey"><?php _e('Reset', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
                 <div class="wpsi-speed-control">
-                    <label><?php _e('Speed:', 'wp-smart-insights'); ?></label>
+                    <label><?php _e('Speed:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                     <select id="wpsi-journey-speed">
                         <option value="0.5">0.5x</option>
                         <option value="1" selected>1x</option>
@@ -381,7 +381,7 @@ class WPSI_User_Journey {
             </div>
             
             <div class="wpsi-journey-events">
-                <h4><?php _e('Journey Events', 'wp-smart-insights'); ?></h4>
+                <h4><?php _e('Journey Events', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
                 <div class="wpsi-events-list"></div>
             </div>
         </div>

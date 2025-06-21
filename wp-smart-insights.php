@@ -9,12 +9,11 @@
  * Author Email: kmsadrulula@gmail.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: wp-smart-insights
+ * Text Domain: smart-insights-content-intelligence-ux-heatmap
  * Domain Path: /languages
  * Requires at least: 5.0
- * Tested up to: 6.4
+ * Tested up to: 6.8
  * Requires PHP: 7.4
- * Network: false
  *
  * @package WP_Smart_Insights
  * @author K M Sadrul Ula
@@ -106,7 +105,7 @@ class WP_Smart_Insights {
     
     public function init() {
         // Load text domain for internationalization
-        load_plugin_textdomain('wp-smart-insights', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('smart-insights-content-intelligence-ux-heatmap', false, dirname(plugin_basename(__FILE__)) . '/languages');
         
         // Initialize components
         $this->init_components();
@@ -144,8 +143,8 @@ class WP_Smart_Insights {
     
     public function add_admin_menu() {
         add_menu_page(
-            __('Smart Insights', 'wp-smart-insights'),
-            __('Smart Insights', 'wp-smart-insights'),
+            __('Smart Insights', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Smart Insights', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights',
             array($this, 'admin_page'),
@@ -155,8 +154,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Dashboard', 'wp-smart-insights'),
-            __('Dashboard', 'wp-smart-insights'),
+            __('Dashboard', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Dashboard', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights',
             array($this, 'admin_page')
@@ -164,8 +163,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Heatmaps', 'wp-smart-insights'),
-            __('Heatmaps', 'wp-smart-insights'),
+            __('Heatmaps', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Heatmaps', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-heatmaps',
             array($this, 'heatmaps_page')
@@ -173,8 +172,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Content Analysis', 'wp-smart-insights'),
-            __('Content Analysis', 'wp-smart-insights'),
+            __('Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-content',
             array($this, 'content_analysis_page')
@@ -182,8 +181,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('SEO Checker', 'wp-smart-insights'),
-            __('SEO Checker', 'wp-smart-insights'),
+            __('SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-seo',
             array($this, 'seo_page')
@@ -191,8 +190,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('User Journeys', 'wp-smart-insights'),
-            __('User Journeys', 'wp-smart-insights'),
+            __('User Journeys', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('User Journeys', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-journeys',
             array($this, 'journeys_page')
@@ -200,8 +199,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Settings', 'wp-smart-insights'),
-            __('Settings', 'wp-smart-insights'),
+            __('Settings', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Settings', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-settings',
             array($this, 'settings_page')
@@ -209,8 +208,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('AI Analysis', 'wp-smart-insights'),
-            __('AI Analysis', 'wp-smart-insights'),
+            __('AI Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('AI Analysis', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-ai',
             array($this, 'ai_analysis_page')
@@ -218,8 +217,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Export Data', 'wp-smart-insights'),
-            __('Export Data', 'wp-smart-insights'),
+            __('Export Data', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Export Data', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-export',
             array($this, 'export_page')
@@ -227,8 +226,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Notifications', 'wp-smart-insights'),
-            __('Notifications', 'wp-smart-insights'),
+            __('Notifications', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Notifications', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-notifications',
             array($this, 'notifications_page')
@@ -236,8 +235,8 @@ class WP_Smart_Insights {
         
         add_submenu_page(
             'wp-smart-insights',
-            __('Analytics & Webhooks', 'wp-smart-insights'),
-            __('Analytics & Webhooks', 'wp-smart-insights'),
+            __('Analytics & Webhooks', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Analytics & Webhooks', 'smart-insights-content-intelligence-ux-heatmap'),
             'manage_options',
             'wp-smart-insights-analytics',
             array($this, 'analytics_page')
@@ -256,9 +255,9 @@ class WP_Smart_Insights {
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('wpsi_nonce'),
             'strings' => array(
-                'analyzing' => __('Analyzing content...', 'wp-smart-insights'),
-                'saving' => __('Saving...', 'wp-smart-insights'),
-                'error' => __('An error occurred', 'wp-smart-insights'),
+                'analyzing' => __('Analyzing content...', 'smart-insights-content-intelligence-ux-heatmap'),
+                'saving' => __('Saving...', 'smart-insights-content-intelligence-ux-heatmap'),
+                'error' => __('An error occurred', 'smart-insights-content-intelligence-ux-heatmap'),
             )
         ));
     }

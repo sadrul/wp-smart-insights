@@ -13,28 +13,28 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('AI Analysis', 'wp-smart-insights'); ?></h1>
+    <h1><?php _e('AI Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
     
     <div class="wpsi-admin-container">
         <!-- AI Configuration Section -->
         <div class="wpsi-card">
-            <h2><?php _e('AI Configuration', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('AI Configuration', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div class="wpsi-form-group">
-                <label for="wpsi_ai_provider"><?php _e('AI Provider:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_ai_provider"><?php _e('AI Provider:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <select id="wpsi_ai_provider" name="wpsi_ai_provider">
-                    <option value="openai" <?php selected(get_option('wpsi_ai_provider', 'openai'), 'openai'); ?>><?php _e('OpenAI GPT', 'wp-smart-insights'); ?></option>
-                    <option value="google" <?php selected(get_option('wpsi_ai_provider', 'openai'), 'google'); ?>><?php _e('Google AI', 'wp-smart-insights'); ?></option>
+                    <option value="openai" <?php selected(get_option('wpsi_ai_provider', 'openai'), 'openai'); ?>><?php _e('OpenAI GPT', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="google" <?php selected(get_option('wpsi_ai_provider', 'openai'), 'google'); ?>><?php _e('Google AI', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_ai_api_key"><?php _e('API Key:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_ai_api_key"><?php _e('API Key:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <input type="password" id="wpsi_ai_api_key" name="wpsi_ai_api_key" value="<?php echo esc_attr(get_option('wpsi_ai_api_key', '')); ?>" class="regular-text">
-                <p class="description"><?php _e('Enter your AI provider API key. Keep it secure.', 'wp-smart-insights'); ?></p>
+                <p class="description"><?php _e('Enter your AI provider API key. Keep it secure.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_ai_model"><?php _e('Model:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_ai_model"><?php _e('Model:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <select id="wpsi_ai_model" name="wpsi_ai_model">
                     <option value="gpt-4" <?php selected(get_option('wpsi_ai_model', 'gpt-4'), 'gpt-4'); ?>>GPT-4</option>
                     <option value="gpt-3.5-turbo" <?php selected(get_option('wpsi_ai_model', 'gpt-4'), 'gpt-3.5-turbo'); ?>>GPT-3.5 Turbo</option>
@@ -42,56 +42,56 @@ if (!defined('ABSPATH')) {
                 </select>
             </div>
             
-            <button type="button" id="wpsi_save_ai_config" class="button button-primary"><?php _e('Save Configuration', 'wp-smart-insights'); ?></button>
+            <button type="button" id="wpsi_save_ai_config" class="button button-primary"><?php _e('Save Configuration', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
         </div>
         
         <!-- Content Analysis Section -->
         <div class="wpsi-card">
-            <h2><?php _e('Content Analysis', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_content_to_analyze"><?php _e('Content to Analyze:', 'wp-smart-insights'); ?></label>
-                <textarea id="wpsi_content_to_analyze" rows="10" class="large-text" placeholder="<?php _e('Paste your content here for AI analysis...', 'wp-smart-insights'); ?>"></textarea>
+                <label for="wpsi_content_to_analyze"><?php _e('Content to Analyze:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <textarea id="wpsi_content_to_analyze" rows="10" class="large-text" placeholder="<?php _e('Paste your content here for AI analysis...', 'smart-insights-content-intelligence-ux-heatmap'); ?>"></textarea>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_analysis_type"><?php _e('Analysis Type:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_analysis_type"><?php _e('Analysis Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <select id="wpsi_analysis_type" name="wpsi_analysis_type">
-                    <option value="readability"><?php _e('Readability Analysis', 'wp-smart-insights'); ?></option>
-                    <option value="seo"><?php _e('SEO Optimization', 'wp-smart-insights'); ?></option>
-                    <option value="engagement"><?php _e('Engagement Analysis', 'wp-smart-insights'); ?></option>
-                    <option value="tone"><?php _e('Tone & Sentiment', 'wp-smart-insights'); ?></option>
-                    <option value="comprehensive"><?php _e('Comprehensive Analysis', 'wp-smart-insights'); ?></option>
+                    <option value="readability"><?php _e('Readability Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="seo"><?php _e('SEO Optimization', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="engagement"><?php _e('Engagement Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="tone"><?php _e('Tone & Sentiment', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="comprehensive"><?php _e('Comprehensive Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_analyze_content_ai" class="button button-primary"><?php _e('Analyze with AI', 'wp-smart-insights'); ?></button>
+            <button type="button" id="wpsi_analyze_content_ai" class="button button-primary"><?php _e('Analyze with AI', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
             
             <div id="wpsi_ai_analysis_results" class="wpsi-analysis-results" style="display: none;">
-                <h3><?php _e('Analysis Results', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('Analysis Results', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div id="wpsi_ai_results_content"></div>
             </div>
         </div>
         
         <!-- Batch Analysis Section -->
         <div class="wpsi-card">
-            <h2><?php _e('Batch Content Analysis', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Batch Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_batch_post_type"><?php _e('Post Type:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_batch_post_type"><?php _e('Post Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <select id="wpsi_batch_post_type" name="wpsi_batch_post_type">
-                    <option value="post"><?php _e('Posts', 'wp-smart-insights'); ?></option>
-                    <option value="page"><?php _e('Pages', 'wp-smart-insights'); ?></option>
-                    <option value="all"><?php _e('All Content', 'wp-smart-insights'); ?></option>
+                    <option value="post"><?php _e('Posts', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="page"><?php _e('Pages', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php _e('All Content', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_batch_limit"><?php _e('Number of Posts:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_batch_limit"><?php _e('Number of Posts:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <input type="number" id="wpsi_batch_limit" name="wpsi_batch_limit" value="10" min="1" max="50">
             </div>
             
-            <button type="button" id="wpsi_batch_analyze" class="button button-secondary"><?php _e('Start Batch Analysis', 'wp-smart-insights'); ?></button>
+            <button type="button" id="wpsi_batch_analyze" class="button button-secondary"><?php _e('Start Batch Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
             
             <div id="wpsi_batch_progress" class="wpsi-progress" style="display: none;">
                 <div class="wpsi-progress-bar">
@@ -101,29 +101,29 @@ if (!defined('ABSPATH')) {
             </div>
             
             <div id="wpsi_batch_results" class="wpsi-batch-results" style="display: none;">
-                <h3><?php _e('Batch Analysis Results', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('Batch Analysis Results', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div id="wpsi_batch_results_content"></div>
             </div>
         </div>
         
         <!-- AI Recommendations Section -->
         <div class="wpsi-card">
-            <h2><?php _e('AI Recommendations', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('AI Recommendations', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_recommendation_focus"><?php _e('Focus Area:', 'wp-smart-insights'); ?></label>
+                <label for="wpsi_recommendation_focus"><?php _e('Focus Area:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                 <select id="wpsi_recommendation_focus" name="wpsi_recommendation_focus">
-                    <option value="content_quality"><?php _e('Content Quality', 'wp-smart-insights'); ?></option>
-                    <option value="user_engagement"><?php _e('User Engagement', 'wp-smart-insights'); ?></option>
-                    <option value="seo_performance"><?php _e('SEO Performance', 'wp-smart-insights'); ?></option>
-                    <option value="conversion_optimization"><?php _e('Conversion Optimization', 'wp-smart-insights'); ?></option>
+                    <option value="content_quality"><?php _e('Content Quality', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="user_engagement"><?php _e('User Engagement', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="seo_performance"><?php _e('SEO Performance', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="conversion_optimization"><?php _e('Conversion Optimization', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_get_recommendations" class="button button-secondary"><?php _e('Get AI Recommendations', 'wp-smart-insights'); ?></button>
+            <button type="button" id="wpsi_get_recommendations" class="button button-secondary"><?php _e('Get AI Recommendations', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
             
             <div id="wpsi_recommendations_results" class="wpsi-recommendations-results" style="display: none;">
-                <h3><?php _e('AI Recommendations', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('AI Recommendations', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div id="wpsi_recommendations_content"></div>
             </div>
         </div>

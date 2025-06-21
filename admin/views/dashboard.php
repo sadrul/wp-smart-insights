@@ -41,7 +41,7 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
 ?>
 
 <div class="wrap">
-    <h1><?php _e('Smart Insights Dashboard', 'wp-smart-insights'); ?></h1>
+    <h1><?php _e('Smart Insights Dashboard', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
     
     <div class="wpsi-dashboard-overview">
         <div class="wpsi-stats-grid">
@@ -49,7 +49,7 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
                 <div class="wpsi-stat-icon dashicons dashicons-admin-post"></div>
                 <div class="wpsi-stat-content">
                     <h3><?php echo $total_posts + $total_pages; ?></h3>
-                    <p><?php _e('Total Posts & Pages', 'wp-smart-insights'); ?></p>
+                    <p><?php _e('Total Posts & Pages', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                 </div>
             </div>
             
@@ -57,23 +57,23 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
                 <div class="wpsi-stat-icon dashicons dashicons-chart-area"></div>
                 <div class="wpsi-stat-content">
                     <h3><?php echo $analyzed_count; ?></h3>
-                    <p><?php _e('Analyzed Content', 'wp-smart-insights'); ?></p>
+                    <p><?php _e('Analyzed Content', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                 </div>
             </div>
             
             <div class="wpsi-stat-card">
                 <div class="wpsi-stat-icon dashicons dashicons-visibility"></div>
                 <div class="wpsi-stat-content">
-                    <h3><?php echo $tracking_enabled ? __('Active', 'wp-smart-insights') : __('Inactive', 'wp-smart-insights'); ?></h3>
-                    <p><?php _e('Tracking Status', 'wp-smart-insights'); ?></p>
+                    <h3><?php echo $tracking_enabled ? __('Active', 'smart-insights-content-intelligence-ux-heatmap') : __('Inactive', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                    <p><?php _e('Tracking Status', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                 </div>
             </div>
             
             <div class="wpsi-stat-card">
                 <div class="wpsi-stat-icon dashicons dashicons-shield"></div>
                 <div class="wpsi-stat-content">
-                    <h3><?php echo $privacy_compliant ? __('Enabled', 'wp-smart-insights') : __('Disabled', 'wp-smart-insights'); ?></h3>
-                    <p><?php _e('Privacy Compliance', 'wp-smart-insights'); ?></p>
+                    <h3><?php echo $privacy_compliant ? __('Enabled', 'smart-insights-content-intelligence-ux-heatmap') : __('Disabled', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                    <p><?php _e('Privacy Compliance', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                 </div>
             </div>
         </div>
@@ -82,33 +82,33 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
     <div class="wpsi-dashboard-sections">
         <!-- Quick Actions -->
         <div class="wpsi-section">
-            <h2><?php _e('Quick Actions', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Quick Actions', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div class="wpsi-quick-actions">
-                <a href="<?php echo admin_url('admin.php?page=wp-smart-insights-content'); ?>" class="button button-primary">
+                <a href="<?php echo admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-content'); ?>" class="button button-primary">
                     <span class="dashicons dashicons-edit"></span>
-                    <?php _e('Analyze Content', 'wp-smart-insights'); ?>
+                    <?php _e('Analyze Content', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                 </a>
                 
-                <a href="<?php echo admin_url('admin.php?page=wp-smart-insights-heatmaps'); ?>" class="button button-secondary">
+                <a href="<?php echo admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-heatmaps'); ?>" class="button button-secondary">
                     <span class="dashicons dashicons-chart-area"></span>
-                    <?php _e('View Heatmaps', 'wp-smart-insights'); ?>
+                    <?php _e('View Heatmaps', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                 </a>
                 
-                <a href="<?php echo admin_url('admin.php?page=wp-smart-insights-seo'); ?>" class="button button-secondary">
+                <a href="<?php echo admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-seo'); ?>" class="button button-secondary">
                     <span class="dashicons dashicons-search"></span>
-                    <?php _e('SEO Checker', 'wp-smart-insights'); ?>
+                    <?php _e('SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                 </a>
                 
-                <a href="<?php echo admin_url('admin.php?page=wp-smart-insights-settings'); ?>" class="button button-secondary">
+                <a href="<?php echo admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-settings'); ?>" class="button button-secondary">
                     <span class="dashicons dashicons-admin-settings"></span>
-                    <?php _e('Settings', 'wp-smart-insights'); ?>
+                    <?php _e('Settings', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                 </a>
             </div>
         </div>
         
         <!-- Recent Analysis -->
         <div class="wpsi-section">
-            <h2><?php _e('Recent Analysis', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Recent Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <?php if (!empty($recent_posts)): ?>
                 <div class="wpsi-recent-analysis">
                     <?php foreach ($recent_posts as $post): ?>
@@ -126,21 +126,21 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
                             <div class="wpsi-analysis-metrics">
                                 <?php if ($content_analysis): ?>
                                     <div class="wpsi-metric">
-                                        <span class="wpsi-metric-label"><?php _e('Content Score', 'wp-smart-insights'); ?></span>
+                                        <span class="wpsi-metric-label"><?php _e('Content Score', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                                         <span class="wpsi-metric-value"><?php echo esc_html($content_analysis['overall_score'] ?? 0); ?>/100</span>
                                     </div>
                                 <?php endif; ?>
                                 
                                 <?php if ($seo_analysis): ?>
                                     <div class="wpsi-metric">
-                                        <span class="wpsi-metric-label"><?php _e('SEO Score', 'wp-smart-insights'); ?></span>
+                                        <span class="wpsi-metric-label"><?php _e('SEO Score', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                                         <span class="wpsi-metric-value"><?php echo esc_html($seo_analysis['overall_score'] ?? 0); ?>/100</span>
                                     </div>
                                 <?php endif; ?>
                                 
                                 <?php if ($heatmap_stats): ?>
                                     <div class="wpsi-metric">
-                                        <span class="wpsi-metric-label"><?php _e('Sessions', 'wp-smart-insights'); ?></span>
+                                        <span class="wpsi-metric-label"><?php _e('Sessions', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                                         <span class="wpsi-metric-value"><?php echo count($heatmap_stats); ?></span>
                                     </div>
                                 <?php endif; ?>
@@ -148,53 +148,53 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
                             
                             <div class="wpsi-analysis-actions">
                                 <a href="<?php echo get_edit_post_link($post->ID); ?>" class="button button-small">
-                                    <?php _e('Edit', 'wp-smart-insights'); ?>
+                                    <?php _e('Edit', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                                 </a>
                                 <a href="<?php echo get_permalink($post->ID); ?>" class="button button-small" target="_blank">
-                                    <?php _e('View', 'wp-smart-insights'); ?>
+                                    <?php _e('View', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                                 </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <p><?php _e('No analyzed content found. Start by analyzing your posts and pages.', 'wp-smart-insights'); ?></p>
+                <p><?php _e('No analyzed content found. Start by analyzing your posts and pages.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
             <?php endif; ?>
         </div>
         
         <!-- System Status -->
         <div class="wpsi-section">
-            <h2><?php _e('System Status', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('System Status', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div class="wpsi-status-grid">
                 <div class="wpsi-status-item">
                     <span class="wpsi-status-icon dashicons <?php echo $tracking_enabled ? 'dashicons-yes-alt' : 'dashicons-no-alt'; ?>"></span>
                     <div class="wpsi-status-content">
-                        <h4><?php _e('Tracking', 'wp-smart-insights'); ?></h4>
-                        <p><?php echo $tracking_enabled ? __('Enabled', 'wp-smart-insights') : __('Disabled', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Tracking', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php echo $tracking_enabled ? __('Enabled', 'smart-insights-content-intelligence-ux-heatmap') : __('Disabled', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-status-item">
                     <span class="wpsi-status-icon dashicons <?php echo $privacy_compliant ? 'dashicons-yes-alt' : 'dashicons-no-alt'; ?>"></span>
                     <div class="wpsi-status-content">
-                        <h4><?php _e('Privacy Compliance', 'wp-smart-insights'); ?></h4>
-                        <p><?php echo $privacy_compliant ? __('Enabled', 'wp-smart-insights') : __('Disabled', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Privacy Compliance', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php echo $privacy_compliant ? __('Enabled', 'smart-insights-content-intelligence-ux-heatmap') : __('Disabled', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-status-item">
                     <span class="wpsi-status-icon dashicons dashicons-yes-alt"></span>
                     <div class="wpsi-status-content">
-                        <h4><?php _e('Database Tables', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('Ready', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Database Tables', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('Ready', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-status-item">
                     <span class="wpsi-status-icon dashicons dashicons-yes-alt"></span>
                     <div class="wpsi-status-content">
-                        <h4><?php _e('File Permissions', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('OK', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('File Permissions', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('OK', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
             </div>
@@ -202,37 +202,37 @@ $privacy_compliant = get_option('wpsi_privacy_compliant', true);
         
         <!-- Getting Started -->
         <div class="wpsi-section">
-            <h2><?php _e('Getting Started', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Getting Started', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div class="wpsi-getting-started">
                 <div class="wpsi-step">
                     <div class="wpsi-step-number">1</div>
                     <div class="wpsi-step-content">
-                        <h4><?php _e('Enable Tracking', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('Go to Settings and enable user tracking to start collecting heatmap and journey data.', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Enable Tracking', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('Go to Settings and enable user tracking to start collecting heatmap and journey data.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-step">
                     <div class="wpsi-step-number">2</div>
                     <div class="wpsi-step-content">
-                        <h4><?php _e('Analyze Content', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('Use the Content Analysis tool to get AI-powered insights about your posts and pages.', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Analyze Content', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('Use the Content Analysis tool to get AI-powered insights about your posts and pages.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-step">
                     <div class="wpsi-step-number">3</div>
                     <div class="wpsi-step-content">
-                        <h4><?php _e('Check SEO', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('Run SEO analysis to identify and fix issues with headings, meta tags, and internal links.', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Check SEO', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('Run SEO analysis to identify and fix issues with headings, meta tags, and internal links.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
                 
                 <div class="wpsi-step">
                     <div class="wpsi-step-number">4</div>
                     <div class="wpsi-step-content">
-                        <h4><?php _e('Review Insights', 'wp-smart-insights'); ?></h4>
-                        <p><?php _e('Monitor heatmaps and user journeys to optimize your content and user experience.', 'wp-smart-insights'); ?></p>
+                        <h4><?php _e('Review Insights', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                        <p><?php _e('Monitor heatmaps and user journeys to optimize your content and user experience.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                     </div>
                 </div>
             </div>

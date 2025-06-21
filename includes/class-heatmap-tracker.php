@@ -126,7 +126,7 @@ class WPSI_Heatmap_Tracker {
     
     public function inject_admin_preview() {
         $screen = get_current_screen();
-        if (!$screen || strpos($screen->id, 'wp-smart-insights-heatmaps') === false) {
+        if (!$screen || strpos($screen->id, 'smart-insights-content-intelligence-ux-heatmap-heatmaps') === false) {
             return;
         }
         
@@ -134,10 +134,10 @@ class WPSI_Heatmap_Tracker {
         <div id="wpsi-heatmap-preview" style="display: none;">
             <div class="wpsi-heatmap-overlay">
                 <div class="wpsi-heatmap-controls">
-                    <button type="button" class="button" id="wpsi-show-clicks"><?php _e('Show Clicks', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-hovers"><?php _e('Show Hovers', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-scroll"><?php _e('Show Scroll Depth', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php _e('Clear', 'wp-smart-insights'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-clicks"><?php _e('Show Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-hovers"><?php _e('Show Hovers', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-scroll"><?php _e('Show Scroll Depth', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php _e('Clear', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
                 </div>
                 <canvas id="wpsi-heatmap-canvas"></canvas>
             </div>
@@ -360,8 +360,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['avg_scroll_depth'] < 30) {
             $warnings[] = array(
                 'type' => 'warning',
-                'message' => __('Low scroll depth detected. Content may not be engaging enough.', 'wp-smart-insights'),
-                'suggestion' => __('Consider adding more engaging content or improving the introduction.', 'wp-smart-insights')
+                'message' => __('Low scroll depth detected. Content may not be engaging enough.', 'smart-insights-content-intelligence-ux-heatmap'),
+                'suggestion' => __('Consider adding more engaging content or improving the introduction.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         
@@ -369,8 +369,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['total_clicks'] < 5 && $stats['total_sessions'] > 10) {
             $warnings[] = array(
                 'type' => 'warning',
-                'message' => __('Low click engagement. CTAs may not be prominent enough.', 'wp-smart-insights'),
-                'suggestion' => __('Consider making call-to-action buttons more visible or compelling.', 'wp-smart-insights')
+                'message' => __('Low click engagement. CTAs may not be prominent enough.', 'smart-insights-content-intelligence-ux-heatmap'),
+                'suggestion' => __('Consider making call-to-action buttons more visible or compelling.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         
@@ -378,8 +378,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['avg_scroll_depth'] > 80 && $stats['total_clicks'] < 10) {
             $warnings[] = array(
                 'type' => 'info',
-                'message' => __('Users are scrolling but not clicking. Content may be too long.', 'wp-smart-insights'),
-                'suggestion' => __('Consider breaking content into shorter sections or adding more interactive elements.', 'wp-smart-insights')
+                'message' => __('Users are scrolling but not clicking. Content may be too long.', 'smart-insights-content-intelligence-ux-heatmap'),
+                'suggestion' => __('Consider breaking content into shorter sections or adding more interactive elements.', 'smart-insights-content-intelligence-ux-heatmap')
             );
         }
         

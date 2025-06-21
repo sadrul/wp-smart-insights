@@ -6,16 +6,16 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('User Journeys', 'wp-smart-insights'); ?></h1>
-    <p class="description"><?php _e('View recorded user interactions and analyze user behavior patterns.', 'wp-smart-insights'); ?></p>
+    <h1><?php _e('User Journeys', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
+    <p class="description"><?php _e('View recorded user interactions and analyze user behavior patterns.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
     
     <div class="wpsi-journeys-container">
         <!-- Journey Selection -->
         <div class="wpsi-journey-selector">
-            <h2><?php _e('Select User Journey', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Select User Journey', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div class="wpsi-journey-filters">
                 <select id="wpsi-post-filter">
-                    <option value=""><?php _e('All Posts', 'wp-smart-insights'); ?></option>
+                    <option value=""><?php _e('All Posts', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                     <?php
                     $posts_with_journeys = get_posts(array(
                         'post_type' => 'post',
@@ -36,34 +36,34 @@ if (!defined('ABSPATH')) {
                 </select>
                 
                 <select id="wpsi-date-filter">
-                    <option value=""><?php _e('All Dates', 'wp-smart-insights'); ?></option>
-                    <option value="today"><?php _e('Today', 'wp-smart-insights'); ?></option>
-                    <option value="yesterday"><?php _e('Yesterday', 'wp-smart-insights'); ?></option>
-                    <option value="week"><?php _e('Last 7 Days', 'wp-smart-insights'); ?></option>
-                    <option value="month"><?php _e('Last 30 Days', 'wp-smart-insights'); ?></option>
+                    <option value=""><?php _e('All Dates', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="today"><?php _e('Today', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="yesterday"><?php _e('Yesterday', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="week"><?php _e('Last 7 Days', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="month"><?php _e('Last 30 Days', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 </select>
                 
-                <button id="wpsi-load-journeys" class="button button-primary"><?php _e('Load Journeys', 'wp-smart-insights'); ?></button>
+                <button id="wpsi-load-journeys" class="button button-primary"><?php _e('Load Journeys', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
             </div>
         </div>
         
         <!-- Journey List -->
         <div class="wpsi-journey-list">
-            <h2><?php _e('Recorded Journeys', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Recorded Journeys', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <div id="wpsi-journeys-table">
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Date/Time', 'wp-smart-insights'); ?></th>
-                            <th><?php _e('Post', 'wp-smart-insights'); ?></th>
-                            <th><?php _e('Duration', 'wp-smart-insights'); ?></th>
-                            <th><?php _e('Actions', 'wp-smart-insights'); ?></th>
-                            <th><?php _e('Interactions', 'wp-smart-insights'); ?></th>
+                            <th><?php _e('Date/Time', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
+                            <th><?php _e('Post', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
+                            <th><?php _e('Duration', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
+                            <th><?php _e('Actions', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
+                            <th><?php _e('Interactions', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="wpsi-journeys-tbody">
                         <tr>
-                            <td colspan="5"><?php _e('No journeys found. Select filters and click "Load Journeys".', 'wp-smart-insights'); ?></td>
+                            <td colspan="5"><?php _e('No journeys found. Select filters and click "Load Journeys".', 'smart-insights-content-intelligence-ux-heatmap'); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,15 +72,15 @@ if (!defined('ABSPATH')) {
         
         <!-- Journey Playback -->
         <div id="wpsi-journey-playback" class="wpsi-journey-playback" style="display: none;">
-            <h2><?php _e('Journey Playback', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Journey Playback', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             
             <div class="wpsi-playback-controls">
-                <button id="wpsi-play-pause" class="button"><?php _e('Play', 'wp-smart-insights'); ?></button>
-                <button id="wpsi-stop" class="button"><?php _e('Stop', 'wp-smart-insights'); ?></button>
-                <button id="wpsi-reset" class="button"><?php _e('Reset', 'wp-smart-insights'); ?></button>
+                <button id="wpsi-play-pause" class="button"><?php _e('Play', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                <button id="wpsi-stop" class="button"><?php _e('Stop', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                <button id="wpsi-reset" class="button"><?php _e('Reset', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
                 
                 <div class="wpsi-speed-control">
-                    <label><?php _e('Speed:', 'wp-smart-insights'); ?></label>
+                    <label><?php _e('Speed:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
                     <select id="wpsi-playback-speed">
                         <option value="0.5">0.5x</option>
                         <option value="1" selected>1x</option>
@@ -100,14 +100,14 @@ if (!defined('ABSPATH')) {
             
             <div class="wpsi-playback-container">
                 <div class="wpsi-page-preview">
-                    <h3><?php _e('Page Preview', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Page Preview', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div id="wpsi-page-content" class="wpsi-page-content">
                         <!-- Page content will be loaded here -->
                     </div>
                 </div>
                 
                 <div class="wpsi-interaction-log">
-                    <h3><?php _e('Interaction Log', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Interaction Log', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div id="wpsi-interaction-list" class="wpsi-interaction-list">
                         <!-- Interaction events will be displayed here -->
                     </div>
@@ -115,22 +115,22 @@ if (!defined('ABSPATH')) {
             </div>
             
             <div class="wpsi-journey-stats">
-                <h3><?php _e('Journey Statistics', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('Journey Statistics', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div class="wpsi-stats-grid">
                     <div class="wpsi-stat-item">
-                        <span class="wpsi-stat-label"><?php _e('Total Clicks', 'wp-smart-insights'); ?></span>
+                        <span class="wpsi-stat-label"><?php _e('Total Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                         <span id="wpsi-total-clicks" class="wpsi-stat-value">0</span>
                     </div>
                     <div class="wpsi-stat-item">
-                        <span class="wpsi-stat-label"><?php _e('Scroll Events', 'wp-smart-insights'); ?></span>
+                        <span class="wpsi-stat-label"><?php _e('Scroll Events', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                         <span id="wpsi-total-scrolls" class="wpsi-stat-value">0</span>
                     </div>
                     <div class="wpsi-stat-item">
-                        <span class="wpsi-stat-label"><?php _e('Form Interactions', 'wp-smart-insights'); ?></span>
+                        <span class="wpsi-stat-label"><?php _e('Form Interactions', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                         <span id="wpsi-total-forms" class="wpsi-stat-value">0</span>
                     </div>
                     <div class="wpsi-stat-item">
-                        <span class="wpsi-stat-label"><?php _e('Time on Page', 'wp-smart-insights'); ?></span>
+                        <span class="wpsi-stat-label"><?php _e('Time on Page', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                         <span id="wpsi-time-on-page" class="wpsi-stat-value">0s</span>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ if (!defined('ABSPATH')) {
         <!-- Loading State -->
         <div id="wpsi-journeys-loading" class="wpsi-loading" style="display: none;">
             <div class="wpsi-spinner"></div>
-            <p><?php _e('Loading journeys...', 'wp-smart-insights'); ?></p>
+            <p><?php _e('Loading journeys...', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
         </div>
     </div>
 </div>
@@ -378,12 +378,12 @@ jQuery(document).ready(function($) {
                 if (response.success) {
                     displayJourneys(response.data);
                 } else {
-                    alert('<?php _e('Error loading journeys.', 'wp-smart-insights'); ?>');
+                    alert('<?php _e('Error loading journeys.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
                 }
             },
             error: function() {
                 $('#wpsi-journeys-loading').hide();
-                alert('<?php _e('Error loading journeys.', 'wp-smart-insights'); ?>');
+                alert('<?php _e('Error loading journeys.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
             }
         });
     });
@@ -393,7 +393,7 @@ jQuery(document).ready(function($) {
         tbody.empty();
         
         if (journeys.length === 0) {
-            tbody.append('<tr><td colspan="5"><?php _e('No journeys found for the selected criteria.', 'wp-smart-insights'); ?></td></tr>');
+            tbody.append('<tr><td colspan="5"><?php _e('No journeys found for the selected criteria.', 'smart-insights-content-intelligence-ux-heatmap'); ?></td></tr>');
             return;
         }
         
@@ -402,7 +402,7 @@ jQuery(document).ready(function($) {
             row += '<td>' + journey.timestamp + '</td>';
             row += '<td>' + journey.post_title + '</td>';
             row += '<td>' + journey.duration + '</td>';
-            row += '<td><button class="button wpsi-play-journey" data-journey-id="' + journey.id + '"><?php _e('Play', 'wp-smart-insights'); ?></button></td>';
+            row += '<td><button class="button wpsi-play-journey" data-journey-id="' + journey.id + '"><?php _e('Play', 'smart-insights-content-intelligence-ux-heatmap'); ?></button></td>';
             row += '<td>' + journey.interaction_count + '</td>';
             row += '</tr>';
             tbody.append(row);
@@ -429,11 +429,11 @@ jQuery(document).ready(function($) {
                     setupPlayback();
                     $('#wpsi-journey-playback').show();
                 } else {
-                    alert('<?php _e('Error loading journey details.', 'wp-smart-insights'); ?>');
+                    alert('<?php _e('Error loading journey details.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
                 }
             },
             error: function() {
-                alert('<?php _e('Error loading journey details.', 'wp-smart-insights'); ?>');
+                alert('<?php _e('Error loading journey details.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
             }
         });
     }
@@ -484,7 +484,7 @@ jQuery(document).ready(function($) {
         if (!currentJourney) return;
         
         isPlaying = true;
-        $('#wpsi-play-pause').text('<?php _e('Pause', 'wp-smart-insights'); ?>');
+        $('#wpsi-play-pause').text('<?php _e('Pause', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
         
         var speed = parseFloat($('#wpsi-playback-speed').val());
         var interval = 1000 / speed;
@@ -501,7 +501,7 @@ jQuery(document).ready(function($) {
     
     function pausePlayback() {
         isPlaying = false;
-        $('#wpsi-play-pause').text('<?php _e('Play', 'wp-smart-insights'); ?>');
+        $('#wpsi-play-pause').text('<?php _e('Play', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
         clearInterval(playbackInterval);
     }
     

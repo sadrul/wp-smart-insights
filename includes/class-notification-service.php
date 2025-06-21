@@ -209,7 +209,7 @@ class WPSI_Notification_Service {
             }
         }
         
-        $message .= "\nView full analysis: " . admin_url('admin.php?page=wp-smart-insights-content&post_id=' . $post->ID);
+        $message .= "\nView full analysis: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-content&post_id=' . $post->ID);
         
         return $message;
     }
@@ -236,7 +236,7 @@ class WPSI_Notification_Service {
             }
         }
         
-        $message .= "\nView SEO analysis: " . admin_url('admin.php?page=wp-smart-insights-seo&post_id=' . $post->ID);
+        $message .= "\nView SEO analysis: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-seo&post_id=' . $post->ID);
         
         return $message;
     }
@@ -259,7 +259,7 @@ class WPSI_Notification_Service {
             }
         }
         
-        $message .= "\nView heatmap: " . admin_url('admin.php?page=wp-smart-insights-heatmaps&post_id=' . $post->ID);
+        $message .= "\nView heatmap: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-heatmaps&post_id=' . $post->ID);
         
         return $message;
     }
@@ -282,7 +282,7 @@ class WPSI_Notification_Service {
             }
         }
         
-        $message .= "\nView user journeys: " . admin_url('admin.php?page=wp-smart-insights-journeys&post_id=' . $post->ID);
+        $message .= "\nView user journeys: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-journeys&post_id=' . $post->ID);
         
         return $message;
     }
@@ -303,7 +303,7 @@ class WPSI_Notification_Service {
             }
         }
         
-        $message .= "\nManage privacy settings: " . admin_url('admin.php?page=wp-smart-insights-settings');
+        $message .= "\nManage privacy settings: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-settings');
         
         return $message;
     }
@@ -330,7 +330,7 @@ class WPSI_Notification_Service {
             $message .= "- " . $content['title'] . " (Score: " . $content['score'] . ")\n";
         }
         
-        $message .= "\nView full dashboard: " . admin_url('admin.php?page=wp-smart-insights');
+        $message .= "\nView full dashboard: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap');
         
         return $message;
     }
@@ -358,7 +358,7 @@ class WPSI_Notification_Service {
             $message .= "- " . $rec . "\n";
         }
         
-        $message .= "\nView detailed report: " . admin_url('admin.php?page=wp-smart-insights');
+        $message .= "\nView detailed report: " . admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap');
         
         return $message;
     }

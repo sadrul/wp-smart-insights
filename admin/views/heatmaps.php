@@ -28,17 +28,17 @@ if ($selected_post_id > 0) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('Smart Insights - Heatmaps', 'wp-smart-insights'); ?></h1>
+    <h1><?php _e('Smart Insights - Heatmaps', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
     
     <div class="wpsi-heatmaps-container">
         <!-- Post Selection -->
         <div class="wpsi-section">
-            <h2><?php _e('Select Page/Post', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Select Page/Post', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             
             <form method="get" action="">
-                <input type="hidden" name="page" value="wp-smart-insights-heatmaps" />
+                <input type="hidden" name="page" value="smart-insights-content-intelligence-ux-heatmap-heatmaps" />
                 <select name="post_id" id="wpsi-post-select">
-                    <option value=""><?php _e('-- Select a page or post --', 'wp-smart-insights'); ?></option>
+                    <option value=""><?php _e('-- Select a page or post --', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                     <?php foreach ($posts_with_heatmaps as $post): ?>
                         <?php
                         $heatmap_data = get_post_meta($post->ID, '_wpsi_heatmap_data', true);
@@ -49,7 +49,7 @@ if ($selected_post_id > 0) {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <input type="submit" class="button" value="<?php _e('Load Heatmap', 'wp-smart-insights'); ?>" />
+                <input type="submit" class="button" value="<?php _e('Load Heatmap', 'smart-insights-content-intelligence-ux-heatmap'); ?>" />
             </form>
         </div>
         
@@ -63,14 +63,14 @@ if ($selected_post_id > 0) {
             
             <!-- Heatmap Statistics -->
             <div class="wpsi-section">
-                <h2><?php _e('Heatmap Statistics', 'wp-smart-insights'); ?></h2>
+                <h2><?php _e('Heatmap Statistics', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
                 
                 <div class="wpsi-stats-grid">
                     <div class="wpsi-stat-card">
                         <div class="wpsi-stat-icon dashicons dashicons-groups"></div>
                         <div class="wpsi-stat-content">
                             <h3><?php echo $stats['total_sessions']; ?></h3>
-                            <p><?php _e('Total Sessions', 'wp-smart-insights'); ?></p>
+                            <p><?php _e('Total Sessions', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                         </div>
                     </div>
                     
@@ -78,7 +78,7 @@ if ($selected_post_id > 0) {
                         <div class="wpsi-stat-icon dashicons dashicons-mouse"></div>
                         <div class="wpsi-stat-content">
                             <h3><?php echo $stats['total_clicks']; ?></h3>
-                            <p><?php _e('Total Clicks', 'wp-smart-insights'); ?></p>
+                            <p><?php _e('Total Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                         </div>
                     </div>
                     
@@ -86,7 +86,7 @@ if ($selected_post_id > 0) {
                         <div class="wpsi-stat-icon dashicons dashicons-move"></div>
                         <div class="wpsi-stat-content">
                             <h3><?php echo $stats['total_hovers']; ?></h3>
-                            <p><?php _e('Total Hovers', 'wp-smart-insights'); ?></p>
+                            <p><?php _e('Total Hovers', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                         </div>
                     </div>
                     
@@ -94,7 +94,7 @@ if ($selected_post_id > 0) {
                         <div class="wpsi-stat-icon dashicons dashicons-arrow-down-alt"></div>
                         <div class="wpsi-stat-content">
                             <h3><?php echo $stats['avg_scroll_depth']; ?>%</h3>
-                            <p><?php _e('Avg Scroll Depth', 'wp-smart-insights'); ?></p>
+                            <p><?php _e('Avg Scroll Depth', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ if ($selected_post_id > 0) {
             <!-- UX Warnings -->
             <?php if (!empty($warnings)): ?>
                 <div class="wpsi-section">
-                    <h2><?php _e('UX Insights & Warnings', 'wp-smart-insights'); ?></h2>
+                    <h2><?php _e('UX Insights & Warnings', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
                     
                     <div class="wpsi-warnings">
                         <?php foreach ($warnings as $warning): ?>
@@ -127,14 +127,14 @@ if ($selected_post_id > 0) {
             
             <!-- Heatmap Visualization -->
             <div class="wpsi-section">
-                <h2><?php _e('Heatmap Visualization', 'wp-smart-insights'); ?></h2>
+                <h2><?php _e('Heatmap Visualization', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
                 
                 <div class="wpsi-heatmap-controls">
-                    <button type="button" class="button" id="wpsi-show-clicks"><?php _e('Show Clicks', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-hovers"><?php _e('Show Hovers', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-scroll"><?php _e('Show Scroll Depth', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php _e('Clear', 'wp-smart-insights'); ?></button>
-                    <button type="button" class="button button-secondary" id="wpsi-clear-data"><?php _e('Clear All Data', 'wp-smart-insights'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-clicks"><?php _e('Show Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-hovers"><?php _e('Show Hovers', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-scroll"><?php _e('Show Scroll Depth', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php _e('Clear', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button button-secondary" id="wpsi-clear-data"><?php _e('Clear All Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
                 </div>
                 
                 <div class="wpsi-heatmap-container">
@@ -147,15 +147,15 @@ if ($selected_post_id > 0) {
                 <div class="wpsi-heatmap-legend">
                     <div class="wpsi-legend-item">
                         <div class="wpsi-legend-color clicks"></div>
-                        <span><?php _e('Clicks', 'wp-smart-insights'); ?></span>
+                        <span><?php _e('Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                     </div>
                     <div class="wpsi-legend-item">
                         <div class="wpsi-legend-color hovers"></div>
-                        <span><?php _e('Hovers', 'wp-smart-insights'); ?></span>
+                        <span><?php _e('Hovers', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                     </div>
                     <div class="wpsi-legend-item">
                         <div class="wpsi-legend-color scroll"></div>
-                        <span><?php _e('Scroll Depth', 'wp-smart-insights'); ?></span>
+                        <span><?php _e('Scroll Depth', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@ if ($selected_post_id > 0) {
             <!-- Hotspots -->
             <?php if (!empty($stats['hotspots'])): ?>
                 <div class="wpsi-section">
-                    <h2><?php _e('Click Hotspots', 'wp-smart-insights'); ?></h2>
+                    <h2><?php _e('Click Hotspots', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
                     
                     <div class="wpsi-hotspots">
                         <?php foreach ($stats['hotspots'] as $position => $count): ?>
@@ -174,10 +174,10 @@ if ($selected_post_id > 0) {
                             ?>
                             <div class="wpsi-hotspot-item">
                                 <div class="wpsi-hotspot-position">
-                                    <strong><?php _e('Position:', 'wp-smart-insights'); ?></strong> <?php echo $x; ?>%, <?php echo $y; ?>%
+                                    <strong><?php _e('Position:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo $x; ?>%, <?php echo $y; ?>%
                                 </div>
                                 <div class="wpsi-hotspot-count">
-                                    <strong><?php _e('Clicks:', 'wp-smart-insights'); ?></strong> <?php echo $count; ?>
+                                    <strong><?php _e('Clicks:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo $count; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -189,10 +189,10 @@ if ($selected_post_id > 0) {
             <div class="wpsi-section">
                 <div class="wpsi-no-data">
                     <div class="wpsi-no-data-icon dashicons dashicons-chart-area"></div>
-                    <h3><?php _e('No Heatmap Data Available', 'wp-smart-insights'); ?></h3>
-                    <p><?php _e('Select a page or post from the dropdown above to view heatmap data. Make sure tracking is enabled and users have visited the page.', 'wp-smart-insights'); ?></p>
-                    <a href="<?php echo admin_url('admin.php?page=wp-smart-insights-settings'); ?>" class="button button-primary">
-                        <?php _e('Check Settings', 'wp-smart-insights'); ?>
+                    <h3><?php _e('No Heatmap Data Available', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                    <p><?php _e('Select a page or post from the dropdown above to view heatmap data. Make sure tracking is enabled and users have visited the page.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
+                    <a href="<?php echo admin_url('admin.php?page=smart-insights-content-intelligence-ux-heatmap-settings'); ?>" class="button button-primary">
+                        <?php _e('Check Settings', 'smart-insights-content-intelligence-ux-heatmap'); ?>
                     </a>
                 </div>
             </div>
@@ -522,7 +522,7 @@ jQuery(document).ready(function($) {
     });
     
     $('#wpsi-clear-data').on('click', function() {
-        if (confirm('<?php _e('Are you sure you want to clear all heatmap data for this page?', 'wp-smart-insights'); ?>')) {
+        if (confirm('<?php _e('Are you sure you want to clear all heatmap data for this page?', 'smart-insights-content-intelligence-ux-heatmap'); ?>')) {
             $.post(ajaxurl, {
                 action: 'wpsi_clear_heatmap_data',
                 nonce: '<?php echo wp_create_nonce('wpsi_nonce'); ?>',

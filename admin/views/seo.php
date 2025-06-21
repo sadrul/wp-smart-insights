@@ -6,15 +6,15 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('SEO Checker', 'wp-smart-insights'); ?></h1>
-    <p class="description"><?php _e('Analyze your content for SEO optimization opportunities and get actionable recommendations.', 'wp-smart-insights'); ?></p>
+    <h1><?php _e('SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
+    <p class="description"><?php _e('Analyze your content for SEO optimization opportunities and get actionable recommendations.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
     
     <div class="wpsi-seo-container">
         <!-- Post Selection -->
         <div class="wpsi-seo-post-selector">
-            <h2><?php _e('Select Post to Analyze', 'wp-smart-insights'); ?></h2>
+            <h2><?php _e('Select Post to Analyze', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
             <select id="wpsi-post-selector">
-                <option value=""><?php _e('Choose a post...', 'wp-smart-insights'); ?></option>
+                <option value=""><?php _e('Choose a post...', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
                 <?php
                 $posts = get_posts(array(
                     'post_type' => 'post',
@@ -29,17 +29,17 @@ if (!defined('ABSPATH')) {
                 }
                 ?>
             </select>
-            <button id="wpsi-analyze-seo" class="button button-primary"><?php _e('Analyze SEO', 'wp-smart-insights'); ?></button>
+            <button id="wpsi-analyze-seo" class="button button-primary"><?php _e('Analyze SEO', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
         </div>
         
         <!-- SEO Analysis Results -->
         <div id="wpsi-seo-results" class="wpsi-seo-results" style="display: none;">
             <div class="wpsi-seo-header">
-                <h2><?php _e('SEO Analysis Results', 'wp-smart-insights'); ?></h2>
+                <h2><?php _e('SEO Analysis Results', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
                 <div class="wpsi-seo-score">
                     <div class="wpsi-score-circle">
                         <span id="wpsi-overall-score">0</span>
-                        <span class="wpsi-score-label"><?php _e('Score', 'wp-smart-insights'); ?></span>
+                        <span class="wpsi-score-label"><?php _e('Score', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
                     </div>
                 </div>
             </div>
@@ -47,25 +47,25 @@ if (!defined('ABSPATH')) {
             <!-- SEO Metrics -->
             <div class="wpsi-seo-metrics">
                 <div class="wpsi-metric-card">
-                    <h3><?php _e('Headings Structure', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Headings Structure', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div class="wpsi-metric-score" id="wpsi-headings-score">-</div>
                     <div class="wpsi-metric-details" id="wpsi-headings-details"></div>
                 </div>
                 
                 <div class="wpsi-metric-card">
-                    <h3><?php _e('Meta Tags', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Meta Tags', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div class="wpsi-metric-score" id="wpsi-meta-score">-</div>
                     <div class="wpsi-metric-details" id="wpsi-meta-details"></div>
                 </div>
                 
                 <div class="wpsi-metric-card">
-                    <h3><?php _e('Internal Links', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Internal Links', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div class="wpsi-metric-score" id="wpsi-links-score">-</div>
                     <div class="wpsi-metric-details" id="wpsi-links-details"></div>
                 </div>
                 
                 <div class="wpsi-metric-card">
-                    <h3><?php _e('Images & Alt Tags', 'wp-smart-insights'); ?></h3>
+                    <h3><?php _e('Images & Alt Tags', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                     <div class="wpsi-metric-score" id="wpsi-images-score">-</div>
                     <div class="wpsi-metric-details" id="wpsi-images-details"></div>
                 </div>
@@ -73,13 +73,13 @@ if (!defined('ABSPATH')) {
             
             <!-- Quick Fixes -->
             <div class="wpsi-quick-fixes">
-                <h3><?php _e('Quick Fixes & Recommendations', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('Quick Fixes & Recommendations', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div id="wpsi-fixes-list"></div>
             </div>
             
             <!-- Content Preview -->
             <div class="wpsi-content-preview">
-                <h3><?php _e('Content Preview', 'wp-smart-insights'); ?></h3>
+                <h3><?php _e('Content Preview', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
                 <div id="wpsi-content-preview-content"></div>
             </div>
         </div>
@@ -87,7 +87,7 @@ if (!defined('ABSPATH')) {
         <!-- Loading State -->
         <div id="wpsi-seo-loading" class="wpsi-loading" style="display: none;">
             <div class="wpsi-spinner"></div>
-            <p><?php _e('Analyzing SEO...', 'wp-smart-insights'); ?></p>
+            <p><?php _e('Analyzing SEO...', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
         </div>
     </div>
 </div>
@@ -251,7 +251,7 @@ jQuery(document).ready(function($) {
         var postId = $('#wpsi-post-selector').val();
         
         if (!postId) {
-            alert('<?php _e('Please select a post to analyze.', 'wp-smart-insights'); ?>');
+            alert('<?php _e('Please select a post to analyze.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
             return;
         }
         
@@ -275,12 +275,12 @@ jQuery(document).ready(function($) {
                     displaySEOResults(response.data);
                     $('#wpsi-seo-results').show();
                 } else {
-                    alert('<?php _e('Error analyzing SEO.', 'wp-smart-insights'); ?>');
+                    alert('<?php _e('Error analyzing SEO.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
                 }
             },
             error: function() {
                 $('#wpsi-seo-loading').hide();
-                alert('<?php _e('Error analyzing SEO.', 'wp-smart-insights'); ?>');
+                alert('<?php _e('Error analyzing SEO.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
             }
         });
     });
