@@ -1,11 +1,12 @@
 <?php
 /**
  * Plugin Name: WP Smart Insights – Content Intelligence & UX Heatmap
- * Plugin URI: https://example.com/wp-smart-insights
- * Description: AI-powered content analysis, user engagement heatmaps, and SEO scoring in one dashboard to optimize content quality and user experience.
+ * Plugin URI: https://github.com/sadrul/wp-smart-insights
+ * Description: A comprehensive WordPress plugin that combines AI-driven content analysis, user engagement heatmaps, and SEO scoring in one dashboard to help site owners optimize content quality and user experience.
  * Version: 1.0.0
- * Author: Sadrul
- * Author URI: https://github.com/sadrul/
+ * Author: K M Sadrul Ula
+ * Author URI: https://github.com/sadrul
+ * Author Email: kmsadrulula@gmail.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wp-smart-insights
@@ -13,6 +14,11 @@
  * Requires at least: 5.0
  * Tested up to: 6.4
  * Requires PHP: 7.4
+ * Network: false
+ *
+ * @package WP_Smart_Insights
+ * @author K M Sadrul Ula
+ * @version 1.0.0
  */
 
 // Prevent direct access

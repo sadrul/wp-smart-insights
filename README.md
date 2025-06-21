@@ -2,6 +2,10 @@
 
 A comprehensive WordPress plugin that combines AI-driven content analysis, user engagement heatmaps, and SEO scoring in one dashboard to help site owners optimize content quality and user experience.
 
+**Author:** K M Sadrul Ula  
+**GitHub:** [https://github.com/sadrul](https://github.com/sadrul)  
+**Email:** kmsadrulula@gmail.com
+
 ## Features
 
 ### 🧠 AI-Powered Content Analysis
@@ -203,14 +207,14 @@ Configure webhooks for:
 ## Support
 
 ### Documentation
-- [User Guide](https://example.com/docs)
-- [Developer API](https://example.com/api)
-- [Privacy Policy](https://example.com/privacy)
+- [User Guide](https://github.com/sadrul/wp-smart-insights/wiki)
+- [Developer API](https://github.com/sadrul/wp-smart-insights/wiki/API-Documentation)
+- [Privacy Policy](https://github.com/sadrul/wp-smart-insights/wiki/Privacy-Policy)
 
 ### Support Channels
-- **Email**: support@example.com
-- **Forum**: [WordPress.org Support](https://wordpress.org/support/)
-- **Documentation**: [Full Documentation](https://example.com/docs)
+- **Email**: kmsadrulula@gmail.com
+- **GitHub Issues**: [https://github.com/sadrul/wp-smart-insights/issues](https://github.com/sadrul/wp-smart-insights/issues)
+- **Documentation**: [https://github.com/sadrul/wp-smart-insights/wiki](https://github.com/sadrul/wp-smart-insights/wiki)
 
 ## Changelog
 
@@ -229,14 +233,16 @@ This plugin is licensed under the GPL v2 or later.
 
 ## Credits
 
-- **Development**: Your Name
+- **Development**: K M Sadrul Ula
+- **GitHub**: [https://github.com/sadrul](https://github.com/sadrul)
+- **Email**: kmsadrulula@gmail.com
 - **Design**: Modern WordPress UI patterns
 - **Privacy**: GDPR-compliant architecture
 - **Testing**: WordPress community
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](https://example.com/contributing) for details.
+We welcome contributions! Please see our [Contributing Guidelines](https://github.com/sadrul/wp-smart-insights/blob/main/CONTRIBUTING.md) for details.
 
 ---
 
