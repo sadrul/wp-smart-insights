@@ -65,7 +65,7 @@ class WPSI_Analytics_Service {
                 'event_data' => $event_data,
                 'post_id' => $post_id,
                 'session_id' => $session_id,
-                'user_agent' => sanitize_text_field($_SERVER['HTTP_USER_AGENT']),
+                'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '',
                 'ip_address' => $this->get_client_ip(),
                 'created_at' => current_time('mysql')
             ),
@@ -107,14 +107,13 @@ class WPSI_Analytics_Service {
     private function get_page_views($date_range, $post_id = 0) {
         global $wpdb;
         
-        $where_conditions = array('created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)');
+        $where_base = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
         $where_values = array($date_range);
         if ($post_id > 0) {
-            $where_conditions[] = 'post_id = %d';
+            $where_base .= ' AND post_id = %d';
             $where_values[] = $post_id;
         }
-        $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-        $sql = "SELECT DATE(created_at) as date, COUNT(*) as views, COUNT(DISTINCT session_id) as unique_views FROM {$wpdb->prefix}wpsi_analytics_events $where_clause ORDER BY date DESC";
+        $sql = "SELECT DATE(created_at) as date, COUNT(*) as views, COUNT(DISTINCT session_id) as unique_views FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base ORDER BY date DESC";
         $sql = $wpdb->prepare($sql, $where_values);
         return $wpdb->get_results($sql);
     }
@@ -125,14 +124,13 @@ class WPSI_Analytics_Service {
     private function get_user_engagement($date_range, $post_id = 0) {
         global $wpdb;
         
-        $where_conditions = array('created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)');
+        $where_base = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
         $where_values = array($date_range);
         if ($post_id > 0) {
-            $where_conditions[] = 'post_id = %d';
+            $where_base .= ' AND post_id = %d';
             $where_values[] = $post_id;
         }
-        $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-        $sql = "SELECT event_type, COUNT(*) as count, AVG(JSON_EXTRACT(event_data, '$.duration')) as avg_duration, AVG(JSON_EXTRACT(event_data, '$.scroll_depth')) as avg_scroll_depth FROM {$wpdb->prefix}wpsi_analytics_events $where_clause GROUP BY event_type";
+        $sql = "SELECT event_type, COUNT(*) as count, AVG(JSON_EXTRACT(event_data, '$.duration')) as avg_duration, AVG(JSON_EXTRACT(event_data, '$.scroll_depth')) as avg_scroll_depth FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base GROUP BY event_type";
         $sql = $wpdb->prepare($sql, $where_values);
         return $wpdb->get_results($sql);
     }
@@ -143,14 +141,13 @@ class WPSI_Analytics_Service {
     private function get_content_performance($date_range, $post_id = 0) {
         global $wpdb;
         
-        $where_conditions = array('e.created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)');
+        $where_base = 'e.created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
         $where_values = array($date_range);
         if ($post_id > 0) {
-            $where_conditions[] = 'e.post_id = %d';
+            $where_base .= ' AND e.post_id = %d';
             $where_values[] = $post_id;
         }
-        $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-        $sql = "SELECT p.ID, p.post_title, COUNT(e.id) as total_events, COUNT(DISTINCT e.session_id) as unique_sessions, AVG(JSON_EXTRACT(e.event_data, '$.engagement_score')) as avg_engagement FROM {$wpdb->prefix}wpsi_analytics_events e LEFT JOIN {$wpdb->posts} p ON e.post_id = p.ID $where_clause GROUP BY e.post_id LIMIT 20";
+        $sql = "SELECT p.ID, p.post_title, COUNT(e.id) as total_events, COUNT(DISTINCT e.session_id) as unique_sessions, AVG(JSON_EXTRACT(e.event_data, '$.engagement_score')) as avg_engagement FROM {$wpdb->prefix}wpsi_analytics_events e LEFT JOIN {$wpdb->posts} p ON e.post_id = p.ID WHERE $where_base GROUP BY e.post_id LIMIT 20";
         $sql = $wpdb->prepare($sql, $where_values);
         return $wpdb->get_results($sql);
     }
@@ -161,14 +158,13 @@ class WPSI_Analytics_Service {
     private function get_user_behavior($date_range, $post_id = 0) {
         global $wpdb;
         
-        $where_conditions = array('created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)');
+        $where_base = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
         $where_values = array($date_range);
         if ($post_id > 0) {
-            $where_conditions[] = 'post_id = %d';
+            $where_base .= ' AND post_id = %d';
             $where_values[] = $post_id;
         }
-        $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-        $sql = "SELECT session_id, COUNT(*) as events_count, GROUP_CONCAT(event_type ORDER BY created_at) as event_sequence, MIN(created_at) as session_start, MAX(created_at) as session_end FROM {$wpdb->prefix}wpsi_analytics_events $where_clause GROUP BY session_id LIMIT 50";
+        $sql = "SELECT session_id, COUNT(*) as events_count, GROUP_CONCAT(event_type ORDER BY created_at) as event_sequence, MIN(created_at) as session_start, MAX(created_at) as session_end FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base GROUP BY session_id LIMIT 50";
         $sql = $wpdb->prepare($sql, $where_values);
         return $wpdb->get_results($sql);
     }
@@ -179,15 +175,27 @@ class WPSI_Analytics_Service {
     private function get_conversion_funnel($date_range, $post_id = 0) {
         global $wpdb;
         
-        $where_conditions = array('created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)');
+        // Build the base WHERE clause with placeholders
+        $where_base = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
         $where_values = array($date_range);
+        
         if ($post_id > 0) {
-            $where_conditions[] = 'post_id = %d';
+            $where_base .= ' AND post_id = %d';
             $where_values[] = $post_id;
         }
-        $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-        $sql = "SELECT 'page_view' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events $where_clause AND event_type = 'page_view' UNION ALL SELECT 'scroll' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events $where_clause AND event_type = 'scroll' UNION ALL SELECT 'click' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events $where_clause AND event_type = 'click' UNION ALL SELECT 'form_submit' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events $where_clause AND event_type = 'form_submit'";
-        $sql = $wpdb->prepare($sql, array_merge($where_values, $where_values, $where_values, $where_values));
+        
+        // Build the UNION query with proper placeholders
+        $sql = "SELECT 'page_view' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base AND event_type = 'page_view' 
+                UNION ALL 
+                SELECT 'scroll' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base AND event_type = 'scroll' 
+                UNION ALL 
+                SELECT 'click' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base AND event_type = 'click' 
+                UNION ALL 
+                SELECT 'form_submit' as step, COUNT(DISTINCT session_id) as count FROM {$wpdb->prefix}wpsi_analytics_events WHERE $where_base AND event_type = 'form_submit'";
+        
+        // Prepare with multiple sets of values for each UNION part
+        $all_values = array_merge($where_values, $where_values, $where_values, $where_values);
+        $sql = $wpdb->prepare($sql, $all_values);
         return $wpdb->get_results($sql);
     }
     

@@ -14,7 +14,6 @@
  * Requires at least: 5.0
  * Tested up to: 6.8
  * Requires PHP: 7.4
- * Network: false
  *
  * @package WP_Smart_Insights
  * @author K M Sadrul Ula
@@ -323,10 +322,17 @@ class WP_Smart_Insights {
     public function save_heatmap_data() {
         check_ajax_referer('wpsi_frontend_nonce', 'nonce');
         
-        $post_id = intval($_POST['post_id']);
-        $click_data = sanitize_text_field($_POST['click_data']);
-        $scroll_data = sanitize_text_field($_POST['scroll_data']);
-        $hover_data = sanitize_text_field($_POST['hover_data']);
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
+        
+        $click_data_raw = isset($_POST['click_data']) ? wp_unslash($_POST['click_data']) : '';
+        $click_data = sanitize_text_field($click_data_raw);
+        
+        $scroll_data_raw = isset($_POST['scroll_data']) ? wp_unslash($_POST['scroll_data']) : '';
+        $scroll_data = sanitize_text_field($scroll_data_raw);
+        
+        $hover_data_raw = isset($_POST['hover_data']) ? wp_unslash($_POST['hover_data']) : '';
+        $hover_data = sanitize_text_field($hover_data_raw);
         
         // Save to database
         $heatmap_data = get_post_meta($post_id, '_wpsi_heatmap_data', true);
@@ -349,8 +355,11 @@ class WP_Smart_Insights {
     public function analyze_content() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $content = wp_kses_post($_POST['content']);
-        $post_id = intval($_POST['post_id']);
+        $content_raw = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+        $content = wp_kses_post($content_raw);
+        
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
         
         // Initialize content analyzer
         $analyzer = new WPSI_Content_Analyzer();
@@ -365,7 +374,8 @@ class WP_Smart_Insights {
     public function get_seo_score() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $post_id = intval($_POST['post_id']);
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
         
         // Initialize SEO checker
         $seo_checker = new WPSI_SEO_Checker();
@@ -377,8 +387,11 @@ class WP_Smart_Insights {
     public function save_user_journey() {
         check_ajax_referer('wpsi_frontend_nonce', 'nonce');
         
-        $post_id = intval($_POST['post_id']);
-        $journey_data = sanitize_text_field($_POST['journey_data']);
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
+        
+        $journey_data_raw = isset($_POST['journey_data']) ? wp_unslash($_POST['journey_data']) : '';
+        $journey_data = sanitize_text_field($journey_data_raw);
         
         // Save to database
         $journeys = get_post_meta($post_id, '_wpsi_user_journeys', true);
@@ -511,9 +524,13 @@ class WP_Smart_Insights {
     public function save_ai_config() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        update_option('wpsi_ai_provider', sanitize_text_field($_POST['provider']));
-        update_option('wpsi_ai_api_key', sanitize_text_field($_POST['api_key']));
-        update_option('wpsi_ai_model', sanitize_text_field($_POST['model']));
+        $provider_raw = isset($_POST['provider']) ? wp_unslash($_POST['provider']) : '';
+        $api_key_raw = isset($_POST['api_key']) ? wp_unslash($_POST['api_key']) : '';
+        $model_raw = isset($_POST['model']) ? wp_unslash($_POST['model']) : '';
+        
+        update_option('wpsi_ai_provider', sanitize_text_field($provider_raw));
+        update_option('wpsi_ai_api_key', sanitize_text_field($api_key_raw));
+        update_option('wpsi_ai_model', sanitize_text_field($model_raw));
         
         wp_send_json_success();
     }
@@ -521,8 +538,11 @@ class WP_Smart_Insights {
     public function analyze_content_ai() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $content = wp_kses_post($_POST['content']);
-        $analysis_type = sanitize_text_field($_POST['analysis_type']);
+        $content_raw = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+        $content = wp_kses_post($content_raw);
+        
+        $analysis_type_raw = isset($_POST['analysis_type']) ? wp_unslash($_POST['analysis_type']) : '';
+        $analysis_type = sanitize_text_field($analysis_type_raw);
         
         $ai_service = new WPSI_AI_Service();
         $result = $ai_service->analyze_content($content, $analysis_type);
@@ -533,8 +553,11 @@ class WP_Smart_Insights {
     public function batch_analyze() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $post_type = sanitize_text_field($_POST['post_type']);
-        $limit = intval($_POST['limit']);
+        $post_type_raw = isset($_POST['post_type']) ? wp_unslash($_POST['post_type']) : '';
+        $post_type = sanitize_text_field($post_type_raw);
+        
+        $limit_raw = isset($_POST['limit']) ? wp_unslash($_POST['limit']) : '';
+        $limit = $limit_raw !== '' ? intval($limit_raw) : 10;
         
         $ai_service = new WPSI_AI_Service();
         $result = $ai_service->batch_analyze($post_type, $limit);
@@ -545,7 +568,8 @@ class WP_Smart_Insights {
     public function get_recommendations() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $focus = sanitize_text_field($_POST['focus']);
+        $focus_raw = isset($_POST['focus']) ? wp_unslash($_POST['focus']) : '';
+        $focus = sanitize_text_field($focus_raw);
         
         $ai_service = new WPSI_AI_Service();
         $result = $ai_service->get_recommendations($focus);

@@ -157,8 +157,11 @@ class WPSI_User_Journey {
     public function get_journey_data() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $post_id = intval($_POST['post_id']);
-        $limit = intval($_POST['limit']) ?: 10;
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
+        
+        $limit_raw = isset($_POST['limit']) ? wp_unslash($_POST['limit']) : '';
+        $limit = $limit_raw !== '' ? intval($limit_raw) : 10;
         
         $journeys = get_post_meta($post_id, '_wpsi_user_journeys', true);
         if (!is_array($journeys)) {
@@ -179,7 +182,8 @@ class WPSI_User_Journey {
     public function play_journey() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $journey_data = sanitize_text_field($_POST['journey_data']);
+        $journey_data_raw = isset($_POST['journey_data']) ? wp_unslash($_POST['journey_data']) : '';
+        $journey_data = sanitize_text_field($journey_data_raw);
         $events = json_decode($journey_data, true);
         
         if (!is_array($events)) {
@@ -196,7 +200,8 @@ class WPSI_User_Journey {
     public function clear_journey_data() {
         check_ajax_referer('wpsi_nonce', 'nonce');
         
-        $post_id = intval($_POST['post_id']);
+        $post_id_raw = isset($_POST['post_id']) ? wp_unslash($_POST['post_id']) : '';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
         delete_post_meta($post_id, '_wpsi_user_journeys');
         
         wp_send_json_success();
@@ -358,11 +363,11 @@ class WPSI_User_Journey {
         ?>
         <div class="wpsi-journey-player">
             <div class="wpsi-player-controls">
-                <button type="button" class="button" id="wpsi-play-journey"><?php _e('Play Journey', 'wp-smart-insights'); ?></button>
-                <button type="button" class="button" id="wpsi-pause-journey"><?php _e('Pause', 'wp-smart-insights'); ?></button>
-                <button type="button" class="button" id="wpsi-reset-journey"><?php _e('Reset', 'wp-smart-insights'); ?></button>
+                <button type="button" class="button" id="wpsi-play-journey"><?php esc_html_e('Play Journey', 'wp-smart-insights'); ?></button>
+                <button type="button" class="button" id="wpsi-pause-journey"><?php esc_html_e('Pause', 'wp-smart-insights'); ?></button>
+                <button type="button" class="button" id="wpsi-reset-journey"><?php esc_html_e('Reset', 'wp-smart-insights'); ?></button>
                 <div class="wpsi-speed-control">
-                    <label><?php _e('Speed:', 'wp-smart-insights'); ?></label>
+                    <label><?php esc_html_e('Speed:', 'wp-smart-insights'); ?></label>
                     <select id="wpsi-journey-speed">
                         <option value="0.5">0.5x</option>
                         <option value="1" selected>1x</option>
@@ -383,7 +388,7 @@ class WPSI_User_Journey {
             </div>
             
             <div class="wpsi-journey-events">
-                <h4><?php _e('Journey Events', 'wp-smart-insights'); ?></h4>
+                <h4><?php esc_html_e('Journey Events', 'wp-smart-insights'); ?></h4>
                 <div class="wpsi-events-list"></div>
             </div>
         </div>
