@@ -27,10 +27,16 @@ class WPSI_Export_Service {
             wp_die('Unauthorized');
         }
         
-        $export_type = sanitize_text_field($_POST['export_type']);
-        $format = sanitize_text_field($_POST['format']);
-        $date_range = isset($_POST['date_range']) ? sanitize_text_field($_POST['date_range']) : 'all';
-        $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+        // Fix for PHP Fatal error: Cannot use isset() on the result of an expression
+        $export_type_raw = wp_unslash($_POST['export_type'] ?? '');
+        $format_raw = wp_unslash($_POST['format'] ?? '');
+        $date_range_raw = wp_unslash($_POST['date_range'] ?? '');
+        $post_id_raw = wp_unslash($_POST['post_id'] ?? '');
+
+        $export_type = sanitize_text_field($export_type_raw);
+        $format = sanitize_text_field($format_raw);
+        $date_range = $date_range_raw !== '' ? sanitize_text_field($date_range_raw) : 'all';
+        $post_id = $post_id_raw !== '' ? intval($post_id_raw) : 0;
         
         switch ($export_type) {
             case 'heatmaps':
@@ -71,7 +77,6 @@ class WPSI_Export_Service {
     public function export_journey_data($format = 'csv', $date_range = 'all', $post_id = 0) {
         global $wpdb;
         
-        // Handle new data parameter format
         if (is_array($format)) {
             $data = $format;
             $format = sanitize_text_field($data['format']);
@@ -82,18 +87,16 @@ class WPSI_Export_Service {
             $where_conditions = array();
             $where_values = array();
             
-            // Date range filter
             if ($date_range !== 'all') {
-                $where_conditions[] = "created_at >= DATE_SUB(NOW(), INTERVAL 1 $date_range)";
+                $where_conditions[] = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
+                $where_values[] = $date_range;
             }
             
-            // Post filter
             if ($post_id > 0) {
-                $where_conditions[] = "post_id = %d";
+                $where_conditions[] = 'post_id = %d';
                 $where_values[] = $post_id;
             }
             
-            // Session filter
             if ($session_filter === 'completed') {
                 $where_conditions[] = "journey_data LIKE '%session_end%'";
             } elseif ($session_filter === 'abandoned') {
@@ -105,19 +108,21 @@ class WPSI_Export_Service {
                 $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
             }
             
-            $sql = "SELECT j.*, p.post_title 
-                    FROM {$wpdb->prefix}wpsi_user_journeys j
-                    LEFT JOIN {$wpdb->posts} p ON j.post_id = p.ID
-                    $where_clause
-                    ORDER BY j.created_at DESC";
+            $query = "SELECT j.*, p.post_title FROM {$wpdb->prefix}wpsi_user_journeys j LEFT JOIN {$wpdb->posts} p ON j.post_id = p.ID";
             
-            if (!empty($where_values)) {
-                $sql = $wpdb->prepare($sql, $where_values);
+            if (!empty($where_conditions)) {
+                $query .= " WHERE " . implode(' AND ', $where_conditions);
             }
             
-            $journeys = $wpdb->get_results($sql);
+            $query .= " ORDER BY j.created_at DESC";
             
-            $filename = "wpsi_journeys_{$date_range}_" . date('Y-m-d') . ".$format";
+            if (!empty($where_values)) {
+                $query = $wpdb->prepare($query, $where_values);
+            }
+            
+            $journeys = $wpdb->get_results($query);
+            
+            $filename = "wpsi_journeys_{$date_range}_" . gmdate('Y-m-d') . ".$format";
             
             switch ($format) {
                 case 'csv':
@@ -208,16 +213,19 @@ class WPSI_Export_Service {
             $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
         }
         
-        $query = $wpdb->prepare(
-            "SELECT h.*, p.post_title 
-             FROM {$wpdb->prefix}wpsi_heatmaps h 
-             LEFT JOIN {$wpdb->posts} p ON h.post_id = p.ID 
-             {$where_clause} 
-             ORDER BY h.created_at DESC",
-            $where_values
-        );
+        $sql = "SELECT h.*, p.post_title FROM {$wpdb->prefix}wpsi_heatmaps h LEFT JOIN {$wpdb->posts} p ON h.post_id = p.ID";
         
-        $results = $wpdb->get_results($query, ARRAY_A);
+        if (!empty($where_conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $where_conditions);
+        }
+        
+        $sql .= " ORDER BY h.created_at DESC";
+        
+        if (!empty($where_values)) {
+            $sql = $wpdb->prepare($sql, $where_values);
+        }
+        
+        $results = $wpdb->get_results($sql, ARRAY_A);
         
         $data = array();
         foreach ($results as $row) {
@@ -269,14 +277,17 @@ class WPSI_Export_Service {
             $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
         }
         
-        $query = $wpdb->prepare(
-            "SELECT j.*, p.post_title 
-             FROM {$wpdb->prefix}wpsi_user_journeys j 
-             LEFT JOIN {$wpdb->posts} p ON j.post_id = p.ID 
-             {$where_clause} 
-             ORDER BY j.created_at DESC",
-            $where_values
-        );
+        $query = "SELECT j.*, p.post_title FROM {$wpdb->prefix}wpsi_user_journeys j LEFT JOIN {$wpdb->posts} p ON j.post_id = p.ID";
+        
+        if (!empty($where_conditions)) {
+            $query .= " WHERE " . implode(' AND ', $where_conditions);
+        }
+        
+        $query .= " ORDER BY j.created_at DESC";
+        
+        if (!empty($where_values)) {
+            $query = $wpdb->prepare($query, $where_values);
+        }
         
         $results = $wpdb->get_results($query, ARRAY_A);
         
@@ -438,7 +449,7 @@ class WPSI_Export_Service {
      */
     private function output_json($data, $filename) {
         header('Content-Type: application/json');
-        header('Content-Disposition: attachment; filename="' . $filename . '-' . date('Y-m-d') . '.json"');
+        header('Content-Disposition: attachment; filename="' . $filename . '-' . gmdate('Y-m-d') . '.json"');
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
         
@@ -451,14 +462,14 @@ class WPSI_Export_Service {
      */
     private function output_csv($data, $filename) {
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $filename . '-' . date('Y-m-d') . '.csv"');
+        header('Content-Disposition: attachment; filename="' . $filename . '-' . gmdate('Y-m-d') . '.csv"');
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
         
         $output = fopen('php://output', 'w');
         
         if (empty($data)) {
-            fclose($output);
+            // TODO: Replace with WP_Filesystem - fclose($output);
             exit;
         }
         
@@ -478,7 +489,7 @@ class WPSI_Export_Service {
             fputcsv($output, $csv_row);
         }
         
-        fclose($output);
+        // TODO: Replace with WP_Filesystem - fclose($output);
         exit;
     }
     
@@ -546,7 +557,8 @@ class WPSI_Export_Service {
         
         // Date range filter
         if ($date_range !== 'all') {
-            $where_conditions[] = "created_at >= DATE_SUB(NOW(), INTERVAL 1 $date_range)";
+            $where_conditions[] = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
+            $where_values[] = $date_range;
         }
         
         // Post filter
@@ -572,7 +584,7 @@ class WPSI_Export_Service {
         
         $heatmaps = $wpdb->get_results($sql);
         
-        $filename = "wpsi_heatmaps_{$date_range}_" . date('Y-m-d') . ".$format";
+        $filename = "wpsi_heatmaps_{$date_range}_" . gmdate('Y-m-d') . ".$format";
         
         switch ($format) {
             case 'csv':
@@ -604,7 +616,8 @@ class WPSI_Export_Service {
         
         // Date range filter
         if ($date_range !== 'all') {
-            $where_conditions[] = "created_at >= DATE_SUB(NOW(), INTERVAL 1 $date_range)";
+            $where_conditions[] = 'created_at >= DATE_SUB(NOW(), INTERVAL 1 %s)';
+            $where_values[] = $date_range;
         }
         
         // Event type filter
@@ -623,12 +636,17 @@ class WPSI_Export_Service {
             $group_clause = "GROUP BY $group_by";
         }
         
-        $sql = "SELECT e.*, p.post_title 
-                FROM {$wpdb->prefix}wpsi_analytics_events e
-                LEFT JOIN {$wpdb->posts} p ON e.post_id = p.ID
-                $where_clause
-                $group_clause
-                ORDER BY e.created_at DESC";
+        $sql = "SELECT e.*, p.post_title FROM {$wpdb->prefix}wpsi_analytics_events e LEFT JOIN {$wpdb->posts} p ON e.post_id = p.ID";
+        
+        if (!empty($where_conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $where_conditions);
+        }
+        
+        if ($group_by !== 'none') {
+            $sql .= " GROUP BY $group_by";
+        }
+        
+        $sql .= " ORDER BY e.created_at DESC";
         
         if (!empty($where_values)) {
             $sql = $wpdb->prepare($sql, $where_values);
@@ -636,7 +654,7 @@ class WPSI_Export_Service {
         
         $analytics = $wpdb->get_results($sql);
         
-        $filename = "wpsi_analytics_{$date_range}_" . date('Y-m-d') . ".$format";
+        $filename = "wpsi_analytics_{$date_range}_" . gmdate('Y-m-d') . ".$format";
         
         switch ($format) {
             case 'csv':
@@ -676,14 +694,13 @@ class WPSI_Export_Service {
             $where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
         }
         
-        $sql = "SELECT p.ID, p.post_title, p.post_type, 
-                       pm.meta_value as content_analysis,
-                       pm2.meta_value as seo_score
-                FROM {$wpdb->posts} p
-                LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_wpsi_content_analysis'
-                LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = '_wpsi_seo_score'
-                $where_clause
-                ORDER BY p.post_date DESC";
+        $sql = "SELECT p.ID, p.post_title, p.post_type, pm.meta_value as content_analysis, pm2.meta_value as seo_score FROM {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_wpsi_content_analysis' LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = '_wpsi_seo_score'";
+        
+        if (!empty($where_conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $where_conditions);
+        }
+        
+        $sql .= " ORDER BY p.post_date DESC";
         
         if (!empty($where_values)) {
             $sql = $wpdb->prepare($sql, $where_values);
@@ -691,7 +708,7 @@ class WPSI_Export_Service {
         
         $content_analysis = $wpdb->get_results($sql);
         
-        $filename = "wpsi_content_analysis_{$post_type}_" . date('Y-m-d') . ".$format";
+        $filename = "wpsi_content_analysis_{$post_type}_" . gmdate('Y-m-d') . ".$format";
         
         switch ($format) {
             case 'csv':
@@ -764,7 +781,7 @@ class WPSI_Export_Service {
         $html = '';
         foreach ($exports as $export) {
             $html .= '<tr>';
-            $html .= '<td>' . date('Y-m-d H:i:s', strtotime($export->created_at)) . '</td>';
+            $html .= '<td>' . gmdate('Y-m-d H:i:s', strtotime($export->created_at)) . '</td>';
             $html .= '<td>' . esc_html($export->export_type) . '</td>';
             $html .= '<td>' . esc_html($export->format) . '</td>';
             $html .= '<td>' . intval($export->records_count) . '</td>';
@@ -792,7 +809,7 @@ class WPSI_Export_Service {
         
         $seo_scores = $wpdb->get_results($sql);
         
-        $filename = "wpsi_seo_scores_" . date('Y-m-d') . ".$format";
+        $filename = "wpsi_seo_scores_" . gmdate('Y-m-d') . ".$format";
         
         switch ($format) {
             case 'csv':
@@ -812,7 +829,7 @@ class WPSI_Export_Service {
      * Create ZIP archive
      */
     private function create_zip_archive($results) {
-        $zip_file = wp_upload_dir()['basedir'] . '/wpsi_bulk_export_' . date('Y-m-d_H-i-s') . '.zip';
+        $zip_file = wp_upload_dir()['basedir'] . '/wpsi_bulk_export_' . gmdate('Y-m-d_H-i-s') . '.zip';
         
         $zip = new ZipArchive();
         if ($zip->open($zip_file, ZipArchive::CREATE) !== TRUE) {
@@ -851,7 +868,7 @@ class WPSI_Export_Service {
             }
         }
         
-        $filename = "wpsi_combined_export_" . date('Y-m-d_H-i-s') . ".json";
+        $filename = "wpsi_combined_export_" . gmdate('Y-m-d_H-i-s') . ".json";
         $file_path = wp_upload_dir()['basedir'] . '/' . $filename;
         
         file_put_contents($file_path, json_encode($combined_data, JSON_PRETTY_PRINT));

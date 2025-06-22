@@ -13,52 +13,52 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('Export Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
+    <h1><?php esc_html_e('Export Data', 'wp-smart-insights'); ?></h1>
     
     <div class="wpsi-admin-container">
         <!-- Export Configuration Section -->
         <div class="wpsi-card">
-            <h2><?php _e('Export Configuration', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Export Configuration', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_export_format"><?php _e('Export Format:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_export_format"><?php esc_html_e('Export Format:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_export_format" name="wpsi_export_format">
-                    <option value="csv"><?php _e('CSV', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="json"><?php _e('JSON', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="xml"><?php _e('XML', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="excel"><?php _e('Excel (XLSX)', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="csv"><?php esc_html_e('CSV', 'wp-smart-insights'); ?></option>
+                    <option value="json"><?php esc_html_e('JSON', 'wp-smart-insights'); ?></option>
+                    <option value="xml"><?php esc_html_e('XML', 'wp-smart-insights'); ?></option>
+                    <option value="excel"><?php esc_html_e('Excel (XLSX)', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_export_date_range"><?php _e('Date Range:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_export_date_range"><?php esc_html_e('Date Range:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_export_date_range" name="wpsi_export_date_range">
-                    <option value="all"><?php _e('All Time', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="today"><?php _e('Today', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="yesterday"><?php _e('Yesterday', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="last_7_days"><?php _e('Last 7 Days', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="last_30_days"><?php _e('Last 30 Days', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="last_90_days"><?php _e('Last 90 Days', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="custom"><?php _e('Custom Range', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Time', 'wp-smart-insights'); ?></option>
+                    <option value="today"><?php esc_html_e('Today', 'wp-smart-insights'); ?></option>
+                    <option value="yesterday"><?php esc_html_e('Yesterday', 'wp-smart-insights'); ?></option>
+                    <option value="last_7_days"><?php esc_html_e('Last 7 Days', 'wp-smart-insights'); ?></option>
+                    <option value="last_30_days"><?php esc_html_e('Last 30 Days', 'wp-smart-insights'); ?></option>
+                    <option value="last_90_days"><?php esc_html_e('Last 90 Days', 'wp-smart-insights'); ?></option>
+                    <option value="custom"><?php esc_html_e('Custom Range', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group" id="wpsi_custom_date_range" style="display: none;">
-                <label><?php _e('Custom Date Range:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label><?php esc_html_e('Custom Date Range:', 'wp-smart-insights'); ?></label>
                 <input type="date" id="wpsi_export_start_date" name="wpsi_export_start_date">
-                <span><?php _e('to', 'smart-insights-content-intelligence-ux-heatmap'); ?></span>
+                <span><?php esc_html_e('to', 'wp-smart-insights'); ?></span>
                 <input type="date" id="wpsi_export_end_date" name="wpsi_export_end_date">
             </div>
         </div>
         
         <!-- Heatmap Data Export -->
         <div class="wpsi-card">
-            <h2><?php _e('Heatmap Data Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Heatmap Data Export', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_heatmap_post_filter"><?php _e('Filter by Post:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_heatmap_post_filter"><?php esc_html_e('Filter by Post:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_heatmap_post_filter" name="wpsi_heatmap_post_filter">
-                    <option value="all"><?php _e('All Posts', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Posts', 'wp-smart-insights'); ?></option>
                     <?php
                     $posts = get_posts(array(
                         'post_type' => array('post', 'page'),
@@ -66,134 +66,134 @@ if (!defined('ABSPATH')) {
                         'orderby' => 'title'
                     ));
                     foreach ($posts as $post) {
-                        echo '<option value="' . $post->ID . '">' . esc_html($post->post_title) . '</option>';
+                        echo '<option value="' . esc_attr($post->ID) . '">' . esc_html($post->post_title) . '</option>';
                     }
                     ?>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_heatmap_data_type"><?php _e('Data Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_heatmap_data_type"><?php esc_html_e('Data Type:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_heatmap_data_type" name="wpsi_heatmap_data_type">
-                    <option value="all"><?php _e('All Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="clicks"><?php _e('Click Data Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="scrolls"><?php _e('Scroll Data Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="hovers"><?php _e('Hover Data Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Data', 'wp-smart-insights'); ?></option>
+                    <option value="clicks"><?php esc_html_e('Click Data Only', 'wp-smart-insights'); ?></option>
+                    <option value="scrolls"><?php esc_html_e('Scroll Data Only', 'wp-smart-insights'); ?></option>
+                    <option value="hovers"><?php esc_html_e('Hover Data Only', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_export_heatmaps" class="button button-primary"><?php _e('Export Heatmap Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+            <button type="button" id="wpsi_export_heatmaps" class="button button-primary"><?php esc_html_e('Export Heatmap Data', 'wp-smart-insights'); ?></button>
         </div>
         
         <!-- User Journey Export -->
         <div class="wpsi-card">
-            <h2><?php _e('User Journey Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('User Journey Export', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_journey_post_filter"><?php _e('Filter by Post:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_journey_post_filter"><?php esc_html_e('Filter by Post:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_journey_post_filter" name="wpsi_journey_post_filter">
-                    <option value="all"><?php _e('All Posts', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Posts', 'wp-smart-insights'); ?></option>
                     <?php
                     foreach ($posts as $post) {
-                        echo '<option value="' . $post->ID . '">' . esc_html($post->post_title) . '</option>';
+                        echo '<option value="' . esc_attr($post->ID) . '">' . esc_html($post->post_title) . '</option>';
                     }
                     ?>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_journey_session_filter"><?php _e('Session Filter:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_journey_session_filter"><?php esc_html_e('Session Filter:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_journey_session_filter" name="wpsi_journey_session_filter">
-                    <option value="all"><?php _e('All Sessions', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="completed"><?php _e('Completed Sessions Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="abandoned"><?php _e('Abandoned Sessions Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Sessions', 'wp-smart-insights'); ?></option>
+                    <option value="completed"><?php esc_html_e('Completed Sessions Only', 'wp-smart-insights'); ?></option>
+                    <option value="abandoned"><?php esc_html_e('Abandoned Sessions Only', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_export_journeys" class="button button-primary"><?php _e('Export User Journeys', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+            <button type="button" id="wpsi_export_journeys" class="button button-primary"><?php esc_html_e('Export User Journeys', 'wp-smart-insights'); ?></button>
         </div>
         
         <!-- Analytics Data Export -->
         <div class="wpsi-card">
-            <h2><?php _e('Analytics Data Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Analytics Data Export', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_analytics_event_type"><?php _e('Event Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_analytics_event_type"><?php esc_html_e('Event Type:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_analytics_event_type" name="wpsi_analytics_event_type">
-                    <option value="all"><?php _e('All Events', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="page_view"><?php _e('Page Views', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="click"><?php _e('Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="scroll"><?php _e('Scrolls', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="form_submit"><?php _e('Form Submissions', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="conversion"><?php _e('Conversions', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Events', 'wp-smart-insights'); ?></option>
+                    <option value="page_view"><?php esc_html_e('Page Views', 'wp-smart-insights'); ?></option>
+                    <option value="click"><?php esc_html_e('Clicks', 'wp-smart-insights'); ?></option>
+                    <option value="scroll"><?php esc_html_e('Scrolls', 'wp-smart-insights'); ?></option>
+                    <option value="form_submit"><?php esc_html_e('Form Submissions', 'wp-smart-insights'); ?></option>
+                    <option value="conversion"><?php esc_html_e('Conversions', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_analytics_group_by"><?php _e('Group By:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_analytics_group_by"><?php esc_html_e('Group By:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_analytics_group_by" name="wpsi_analytics_group_by">
-                    <option value="none"><?php _e('No Grouping', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="date"><?php _e('Date', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="post"><?php _e('Post', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="session"><?php _e('Session', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="event_type"><?php _e('Event Type', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="none"><?php esc_html_e('No Grouping', 'wp-smart-insights'); ?></option>
+                    <option value="date"><?php esc_html_e('Date', 'wp-smart-insights'); ?></option>
+                    <option value="post"><?php esc_html_e('Post', 'wp-smart-insights'); ?></option>
+                    <option value="session"><?php esc_html_e('Session', 'wp-smart-insights'); ?></option>
+                    <option value="event_type"><?php esc_html_e('Event Type', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_export_analytics" class="button button-primary"><?php _e('Export Analytics Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+            <button type="button" id="wpsi_export_analytics" class="button button-primary"><?php esc_html_e('Export Analytics Data', 'wp-smart-insights'); ?></button>
         </div>
         
         <!-- Content Analysis Export -->
         <div class="wpsi-card">
-            <h2><?php _e('Content Analysis Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Content Analysis Export', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_content_post_type"><?php _e('Post Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_content_post_type"><?php esc_html_e('Post Type:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_content_post_type" name="wpsi_content_post_type">
-                    <option value="all"><?php _e('All Content', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="post"><?php _e('Posts Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="page"><?php _e('Pages Only', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Content', 'wp-smart-insights'); ?></option>
+                    <option value="post"><?php esc_html_e('Posts Only', 'wp-smart-insights'); ?></option>
+                    <option value="page"><?php esc_html_e('Pages Only', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_content_analysis_type"><?php _e('Analysis Type:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_content_analysis_type"><?php esc_html_e('Analysis Type:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_content_analysis_type" name="wpsi_content_analysis_type">
-                    <option value="all"><?php _e('All Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="readability"><?php _e('Readability Scores', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="seo"><?php _e('SEO Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="engagement"><?php _e('Engagement Metrics', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="all"><?php esc_html_e('All Analysis', 'wp-smart-insights'); ?></option>
+                    <option value="readability"><?php esc_html_e('Readability Scores', 'wp-smart-insights'); ?></option>
+                    <option value="seo"><?php esc_html_e('SEO Analysis', 'wp-smart-insights'); ?></option>
+                    <option value="engagement"><?php esc_html_e('Engagement Metrics', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_export_content_analysis" class="button button-primary"><?php _e('Export Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+            <button type="button" id="wpsi_export_content_analysis" class="button button-primary"><?php esc_html_e('Export Content Analysis', 'wp-smart-insights'); ?></button>
         </div>
         
         <!-- Bulk Export Section -->
         <div class="wpsi-card">
-            <h2><?php _e('Bulk Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Bulk Export', 'wp-smart-insights'); ?></h2>
             
             <div class="wpsi-form-group">
-                <label><?php _e('Select Data Types to Export:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label><?php esc_html_e('Select Data Types to Export:', 'wp-smart-insights'); ?></label>
                 <div class="wpsi-checkbox-group">
-                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="heatmaps" checked> <?php _e('Heatmap Data', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
-                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="journeys" checked> <?php _e('User Journeys', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
-                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="analytics" checked> <?php _e('Analytics Events', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
-                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="content_analysis" checked> <?php _e('Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
-                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="seo_scores" checked> <?php _e('SEO Scores', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="heatmaps" checked> <?php esc_html_e('Heatmap Data', 'wp-smart-insights'); ?></label>
+                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="journeys" checked> <?php esc_html_e('User Journeys', 'wp-smart-insights'); ?></label>
+                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="analytics" checked> <?php esc_html_e('Analytics Events', 'wp-smart-insights'); ?></label>
+                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="content_analysis" checked> <?php esc_html_e('Content Analysis', 'wp-smart-insights'); ?></label>
+                    <label><input type="checkbox" name="wpsi_bulk_export[]" value="seo_scores" checked> <?php esc_html_e('SEO Scores', 'wp-smart-insights'); ?></label>
                 </div>
             </div>
             
             <div class="wpsi-form-group">
-                <label for="wpsi_bulk_export_format"><?php _e('Export as:', 'smart-insights-content-intelligence-ux-heatmap'); ?></label>
+                <label for="wpsi_bulk_export_format"><?php esc_html_e('Export as:', 'wp-smart-insights'); ?></label>
                 <select id="wpsi_bulk_export_format" name="wpsi_bulk_export_format">
-                    <option value="separate_files"><?php _e('Separate Files', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="zip_archive"><?php _e('ZIP Archive', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
-                    <option value="combined_file"><?php _e('Combined File', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value="separate_files"><?php esc_html_e('Separate Files', 'wp-smart-insights'); ?></option>
+                    <option value="zip_archive"><?php esc_html_e('ZIP Archive', 'wp-smart-insights'); ?></option>
+                    <option value="combined_file"><?php esc_html_e('Combined File', 'wp-smart-insights'); ?></option>
                 </select>
             </div>
             
-            <button type="button" id="wpsi_bulk_export" class="button button-secondary"><?php _e('Start Bulk Export', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+            <button type="button" id="wpsi_bulk_export" class="button button-secondary"><?php esc_html_e('Start Bulk Export', 'wp-smart-insights'); ?></button>
             
             <div id="wpsi_bulk_export_progress" class="wpsi-progress" style="display: none;">
                 <div class="wpsi-progress-bar">
@@ -205,17 +205,17 @@ if (!defined('ABSPATH')) {
         
         <!-- Export History -->
         <div class="wpsi-card">
-            <h2><?php _e('Export History', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Export History', 'wp-smart-insights'); ?></h2>
             
             <div id="wpsi_export_history">
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Date', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
-                            <th><?php _e('Type', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
-                            <th><?php _e('Format', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
-                            <th><?php _e('Records', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
-                            <th><?php _e('Actions', 'smart-insights-content-intelligence-ux-heatmap'); ?></th>
+                            <th><?php esc_html_e('Date', 'wp-smart-insights'); ?></th>
+                            <th><?php esc_html_e('Type', 'wp-smart-insights'); ?></th>
+                            <th><?php esc_html_e('Format', 'wp-smart-insights'); ?></th>
+                            <th><?php esc_html_e('Records', 'wp-smart-insights'); ?></th>
+                            <th><?php esc_html_e('Actions', 'wp-smart-insights'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="wpsi_export_history_body">

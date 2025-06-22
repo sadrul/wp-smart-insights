@@ -263,7 +263,7 @@ class WPSI_AI_Service {
         $stats[$provider . '_analyses'] = isset($stats[$provider . '_analyses']) ? $stats[$provider . '_analyses'] + 1 : 1;
         $stats['last_analysis'] = current_time('mysql');
         
-        $current_month = date('Y-m');
+        $current_month = gmdate('Y-m');
         if (!isset($stats['monthly_usage'][$current_month])) {
             $stats['monthly_usage'][$current_month] = 0;
         }
@@ -486,8 +486,8 @@ class WPSI_AI_Service {
             return array('success' => false, 'message' => 'OpenAI API key not configured');
         }
         
-        $current_date = date('Y-m-d');
-        $first_day = date('Y-m-01');
+        $current_date = gmdate('Y-m-d');
+        $first_day = gmdate('Y-m-01');
         
         $response = wp_remote_get("https://api.openai.com/v1/usage?date=$current_date", array(
             'headers' => array(

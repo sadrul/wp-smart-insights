@@ -368,10 +368,10 @@ class WPSI_Notification_Service {
      */
     private function get_weekly_summary_data() {
         $end_date = current_time('mysql');
-        $start_date = date('Y-m-d H:i:s', strtotime('-7 days'));
+        $start_date = gmdate('Y-m-d H:i:s', strtotime('-7 days'));
         
         return array(
-            'period' => date('M j', strtotime($start_date)) . ' - ' . date('M j', strtotime($end_date)),
+            'period' => gmdate('M j', strtotime($start_date)) . ' - ' . gmdate('M j', strtotime($end_date)),
             'posts_analyzed' => $this->get_posts_analyzed_count($start_date, $end_date),
             'avg_content_score' => $this->get_average_content_score($start_date, $end_date),
             'avg_seo_score' => $this->get_average_seo_score($start_date, $end_date),
@@ -387,10 +387,10 @@ class WPSI_Notification_Service {
      */
     private function get_monthly_report_data() {
         $end_date = current_time('mysql');
-        $start_date = date('Y-m-d H:i:s', strtotime('-30 days'));
+        $start_date = gmdate('Y-m-d H:i:s', strtotime('-30 days'));
         
         return array(
-            'period' => date('M j', strtotime($start_date)) . ' - ' . date('M j', strtotime($end_date)),
+            'period' => gmdate('M j', strtotime($start_date)) . ' - ' . gmdate('M j', strtotime($end_date)),
             'total_posts' => wp_count_posts('post')->publish,
             'posts_analyzed' => $this->get_posts_analyzed_count($start_date, $end_date),
             'content_trend' => $this->get_content_trend($start_date, $end_date),
@@ -559,8 +559,8 @@ class WPSI_Notification_Service {
         
         $message = $this->replace_template_variables($template, array(
             'site_name' => get_bloginfo('name'),
-            'week_start' => date('Y-m-d', strtotime('-7 days')),
-            'week_end' => date('Y-m-d'),
+            'week_start' => gmdate('Y-m-d', strtotime('-7 days')),
+            'week_end' => gmdate('Y-m-d'),
             'total_page_views' => $this->calculate_total_page_views($data['page_views']),
             'total_visitors' => $this->calculate_total_visitors($data['page_views']),
             'avg_engagement' => $this->calculate_avg_engagement($data['user_engagement']),
@@ -706,7 +706,7 @@ class WPSI_Notification_Service {
         $html = '';
         foreach ($notifications as $notification) {
             $html .= '<tr>';
-            $html .= '<td>' . date('Y-m-d H:i:s', strtotime($notification->created_at)) . '</td>';
+            $html .= '<td>' . gmdate('Y-m-d H:i:s', strtotime($notification->created_at)) . '</td>';
             $html .= '<td>' . esc_html($notification->notification_type) . '</td>';
             $html .= '<td>' . esc_html($notification->subject) . '</td>';
             $html .= '<td>' . esc_html($notification->status) . '</td>';

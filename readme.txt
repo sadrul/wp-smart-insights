@@ -1,6 +1,6 @@
 === Smart Insights – Content Intelligence & UX Heatmap ===
 Contributors: sadrul
-Tags: analytics, content-analysis, heatmaps, seo, user-experience, ai, engagement, optimization, privacy, gdpr
+Tags: analytics, content-analysis, heatmaps, seo, user-experience
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A comprehensive WordPress plugin that combines AI-driven content analysis, user engagement heatmaps, and SEO scoring in one dashboard to help site owners optimize content quality and user experience.
+AI-powered content analysis, visual heatmaps, and SEO scoring to optimize content quality and user experience.
 
 == Description ==
 

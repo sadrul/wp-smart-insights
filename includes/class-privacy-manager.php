@@ -36,16 +36,16 @@ class WPSI_Privacy_Manager {
         <div id="wpsi-consent-banner" class="wpsi-consent-banner">
             <div class="wpsi-consent-content">
                 <div class="wpsi-consent-text">
-                    <h3><?php _e('We value your privacy', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
-                    <p><?php _e('This website uses Smart Insights to analyze content performance and user experience. We collect anonymous interaction data to improve our content and user experience. No personal information is collected or stored.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
-                    <p><?php _e('You can learn more about what data we collect and how we use it in our', 'smart-insights-content-intelligence-ux-heatmap'); ?> <a href="<?php echo esc_url($this->get_privacy_policy_url()); ?>" target="_blank"><?php _e('Privacy Policy', 'smart-insights-content-intelligence-ux-heatmap'); ?></a>.</p>
+                    <h3><?php esc_html_e('We value your privacy', 'wp-smart-insights'); ?></h3>
+                    <p><?php esc_html_e('This website uses Smart Insights to analyze content performance and user experience. We collect anonymous interaction data to improve our content and user experience. No personal information is collected or stored.', 'wp-smart-insights'); ?></p>
+                    <p><?php esc_html_e('You can learn more about what data we collect and how we use it in our', 'wp-smart-insights'); ?> <a href="<?php echo esc_url($this->get_privacy_policy_url()); ?>" target="_blank"><?php esc_html_e('Privacy Policy', 'wp-smart-insights'); ?></a>.</p>
                 </div>
                 <div class="wpsi-consent-actions">
                     <button type="button" class="wpsi-consent-accept button button-primary">
-                        <?php _e('Accept', 'smart-insights-content-intelligence-ux-heatmap'); ?>
+                        <?php esc_html_e('Accept', 'wp-smart-insights'); ?>
                     </button>
                     <button type="button" class="wpsi-consent-decline button">
-                        <?php _e('Decline', 'smart-insights-content-intelligence-ux-heatmap'); ?>
+                        <?php esc_html_e('Decline', 'wp-smart-insights'); ?>
                     </button>
                 </div>
             </div>
@@ -154,9 +154,9 @@ class WPSI_Privacy_Manager {
             });
             
             function saveConsent(accepted) {
-                $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
+                $.post('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
                     action: 'wpsi_save_consent',
-                    nonce: '<?php echo wp_create_nonce('wpsi_consent_nonce'); ?>',
+                    nonce: '<?php echo esc_js(wp_create_nonce('wpsi_consent_nonce')); ?>',
                     accepted: accepted ? 1 : 0
                 }, function(response) {
                     if (response.success) {
@@ -455,27 +455,28 @@ class WPSI_Privacy_Manager {
     
     public function generate_privacy_policy_content() {
         $content = array(
-            'title' => __('Smart Insights Data Collection', 'smart-insights-content-intelligence-ux-heatmap'),
+            'title' => __('Smart Insights Data Collection', 'wp-smart-insights'),
             'sections' => array(
                 array(
-                    'title' => __('What data we collect', 'smart-insights-content-intelligence-ux-heatmap'),
-                    'content' => __('Smart Insights collects anonymous interaction data including mouse movements, clicks, scroll depth, and page interactions. No personal information such as names, email addresses, or IP addresses are stored or processed.', 'smart-insights-content-intelligence-ux-heatmap')
+                    'title' => __('What data we collect', 'wp-smart-insights'),
+                    'content' => __('Smart Insights collects anonymous interaction data including mouse movements, clicks, scroll depth, and page interactions. No personal information such as names, email addresses, or IP addresses are stored or processed.', 'wp-smart-insights')
                 ),
                 array(
-                    'title' => __('How we use the data', 'smart-insights-content-intelligence-ux-heatmap'),
-                    'content' => __('The collected data is used solely to improve website content, user experience, and performance. We analyze user behavior patterns to optimize page layouts, content structure, and call-to-action placement.', 'smart-insights-content-intelligence-ux-heatmap')
+                    'title' => __('How we use the data', 'wp-smart-insights'),
+                    'content' => __('The collected data is used solely to improve website content, user experience, and performance. We analyze user behavior patterns to optimize page layouts, content structure, and call-to-action placement.', 'wp-smart-insights')
                 ),
                 array(
-                    'title' => __('Data retention', 'smart-insights-content-intelligence-ux-heatmap'),
-                    'content' => sprintf(__('Data is retained for %d days and then automatically deleted. You can request deletion of your data at any time by contacting the website administrator.', 'smart-insights-content-intelligence-ux-heatmap'), get_option('wpsi_data_retention_days', 365))
+                    'title' => __('Data retention', 'wp-smart-insights'),
+                    // translators: %d is the number of days data is retained
+                    'content' => sprintf(__('Data is retained for %d days and then automatically deleted. You can request deletion of your data at any time by contacting the website administrator.', 'wp-smart-insights'), get_option('wpsi_data_retention_days', 365))
                 ),
                 array(
-                    'title' => __('Your rights', 'smart-insights-content-intelligence-ux-heatmap'),
-                    'content' => __('You have the right to withdraw consent at any time, request access to your data, request deletion of your data, and lodge a complaint with supervisory authorities.', 'smart-insights-content-intelligence-ux-heatmap')
+                    'title' => __('Your rights', 'wp-smart-insights'),
+                    'content' => __('You have the right to withdraw consent at any time, request access to your data, request deletion of your data, and lodge a complaint with supervisory authorities.', 'wp-smart-insights')
                 ),
                 array(
-                    'title' => __('Contact information', 'smart-insights-content-intelligence-ux-heatmap'),
-                    'content' => __('For privacy-related questions or requests, please contact the website administrator.', 'smart-insights-content-intelligence-ux-heatmap')
+                    'title' => __('Contact information', 'wp-smart-insights'),
+                    'content' => __('For privacy-related questions or requests, please contact the website administrator.', 'wp-smart-insights')
                 )
             )
         );

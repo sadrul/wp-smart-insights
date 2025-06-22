@@ -19,7 +19,7 @@ class WPSI_SEO_Checker {
     public function add_seo_meta_box() {
         add_meta_box(
             'wpsi-seo-checker',
-            __('Smart Insights - SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Smart Insights - SEO Checker', 'wp-smart-insights'),
             array($this, 'render_meta_box'),
             'post',
             'side',
@@ -28,7 +28,7 @@ class WPSI_SEO_Checker {
         
         add_meta_box(
             'wpsi-seo-checker',
-            __('Smart Insights - SEO Checker', 'smart-insights-content-intelligence-ux-heatmap'),
+            __('Smart Insights - SEO Checker', 'wp-smart-insights'),
             array($this, 'render_meta_box'),
             'page',
             'side',
@@ -46,15 +46,15 @@ class WPSI_SEO_Checker {
         if ($seo_analysis) {
             $this->display_seo_results($seo_analysis);
         } else {
-            echo '<p>' . __('No SEO analysis available. Click "Check SEO" to get started.', 'smart-insights-content-intelligence-ux-heatmap') . '</p>';
+            echo '<p>' . esc_html__('No SEO analysis available. Click "Check SEO" to get started.', 'wp-smart-insights') . '</p>';
         }
         
         echo '<button type="button" id="wpsi-check-seo" class="button button-primary">';
-        echo __('Check SEO', 'smart-insights-content-intelligence-ux-heatmap');
+        echo esc_html__('Check SEO', 'wp-smart-insights');
         echo '</button>';
         
         echo '<div id="wpsi-seo-loading" style="display: none;">';
-        echo '<p>' . __('Analyzing SEO...', 'smart-insights-content-intelligence-ux-heatmap') . '</p>';
+        echo '<p>' . esc_html__('Analyzing SEO...', 'wp-smart-insights') . '</p>';
         echo '</div>';
         
         echo '</div>';
@@ -66,7 +66,7 @@ class WPSI_SEO_Checker {
         // Overall SEO Score
         if (isset($analysis['overall_score'])) {
             echo '<div class="wpsi-score-section">';
-            echo '<h4>' . __('SEO Score', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('SEO Score', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-score-circle" data-score="' . esc_attr($analysis['overall_score']) . '">';
             echo '<span class="wpsi-score-number">' . esc_html($analysis['overall_score']) . '</span>';
             echo '<span class="wpsi-score-label">/100</span>';
@@ -77,11 +77,11 @@ class WPSI_SEO_Checker {
         // Headings Structure
         if (isset($analysis['headings'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Headings Structure', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('Headings Structure', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-headings-list">';
             foreach ($analysis['headings']['structure'] as $heading) {
                 $class = $heading['valid'] ? 'wpsi-valid' : 'wpsi-invalid';
-                echo '<div class="wpsi-heading-item ' . $class . '">';
+                echo '<div class="wpsi-heading-item ' . esc_attr($class) . '">';
                 echo '<span class="wpsi-heading-tag">' . esc_html($heading['tag']) . '</span>';
                 echo '<span class="wpsi-heading-text">' . esc_html($heading['text']) . '</span>';
                 echo '</div>';
@@ -100,11 +100,11 @@ class WPSI_SEO_Checker {
         // Meta Tags
         if (isset($analysis['meta_tags'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Meta Tags', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('Meta Tags', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-meta-tags">';
             foreach ($analysis['meta_tags'] as $tag => $status) {
                 $class = $status['valid'] ? 'wpsi-valid' : 'wpsi-invalid';
-                echo '<div class="wpsi-meta-item ' . $class . '">';
+                echo '<div class="wpsi-meta-item ' . esc_attr($class) . '">';
                 echo '<span class="wpsi-meta-name">' . esc_html($tag) . '</span>';
                 echo '<span class="wpsi-meta-status">' . esc_html($status['message']) . '</span>';
                 echo '</div>';
@@ -116,15 +116,15 @@ class WPSI_SEO_Checker {
         // Internal Links
         if (isset($analysis['internal_links'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Internal Links', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('Internal Links', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-links-info">';
-            echo '<p>' . __('Total: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['internal_links']['count']) . '</p>';
-            echo '<p>' . __('Valid: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['internal_links']['valid']) . '</p>';
-            echo '<p>' . __('Broken: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['internal_links']['broken']) . '</p>';
+            echo '<p>' . esc_html__('Total: ', 'wp-smart-insights') . esc_html($analysis['internal_links']['count']) . '</p>';
+            echo '<p>' . esc_html__('Valid: ', 'wp-smart-insights') . esc_html($analysis['internal_links']['valid']) . '</p>';
+            echo '<p>' . esc_html__('Broken: ', 'wp-smart-insights') . esc_html($analysis['internal_links']['broken']) . '</p>';
             echo '</div>';
             if (!empty($analysis['internal_links']['broken_links'])) {
                 echo '<div class="wpsi-broken-links">';
-                echo '<h5>' . __('Broken Links:', 'smart-insights-content-intelligence-ux-heatmap') . '</h5>';
+                echo '<h5>' . esc_html__('Broken Links:', 'wp-smart-insights') . '</h5>';
                 echo '<ul class="wpsi-suggestions">';
                 foreach ($analysis['internal_links']['broken_links'] as $link) {
                     echo '<li>' . esc_html($link) . '</li>';
@@ -138,15 +138,15 @@ class WPSI_SEO_Checker {
         // Images
         if (isset($analysis['images'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Images', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('Images', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-images-info">';
-            echo '<p>' . __('Total: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['images']['count']) . '</p>';
-            echo '<p>' . __('With Alt: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['images']['with_alt']) . '</p>';
-            echo '<p>' . __('Missing Alt: ', 'smart-insights-content-intelligence-ux-heatmap') . esc_html($analysis['images']['missing_alt']) . '</p>';
+            echo '<p>' . esc_html__('Total: ', 'wp-smart-insights') . esc_html($analysis['images']['count']) . '</p>';
+            echo '<p>' . esc_html__('With Alt: ', 'wp-smart-insights') . esc_html($analysis['images']['with_alt']) . '</p>';
+            echo '<p>' . esc_html__('Missing Alt: ', 'wp-smart-insights') . esc_html($analysis['images']['missing_alt']) . '</p>';
             echo '</div>';
             if (!empty($analysis['images']['missing_alt_images'])) {
                 echo '<div class="wpsi-missing-alt">';
-                echo '<h5>' . __('Images Missing Alt Text:', 'smart-insights-content-intelligence-ux-heatmap') . '</h5>';
+                echo '<h5>' . esc_html__('Images Missing Alt Text:', 'wp-smart-insights') . '</h5>';
                 echo '<ul class="wpsi-suggestions">';
                 foreach ($analysis['images']['missing_alt_images'] as $image) {
                     echo '<li>' . esc_html($image) . '</li>';
@@ -160,7 +160,7 @@ class WPSI_SEO_Checker {
         // Quick Fixes
         if (isset($analysis['quick_fixes']) && !empty($analysis['quick_fixes'])) {
             echo '<div class="wpsi-metric-section">';
-            echo '<h4>' . __('Quick Fixes', 'smart-insights-content-intelligence-ux-heatmap') . '</h4>';
+            echo '<h4>' . esc_html__('Quick Fixes', 'wp-smart-insights') . '</h4>';
             echo '<div class="wpsi-quick-fixes">';
             foreach ($analysis['quick_fixes'] as $fix) {
                 echo '<button type="button" class="button wpsi-quick-fix" data-fix="' . esc_attr($fix['action']) . '">';
@@ -212,7 +212,7 @@ class WPSI_SEO_Checker {
         
         foreach ($matches as $match) {
             $level = intval($match[1]);
-            $text = strip_tags($match[2]);
+            $text = wp_strip_all_tags($match[2]);
             
             $headings[] = array(
                 'level' => $level,
@@ -229,7 +229,7 @@ class WPSI_SEO_Checker {
         
         // Check for heading structure issues
         if (empty($headings)) {
-            $issues[] = __('No headings found. Add H1-H6 tags to improve structure.', 'smart-insights-content-intelligence-ux-heatmap');
+            $issues[] = __('No headings found. Add H1-H6 tags to improve structure.', 'wp-smart-insights');
         } else {
             // Check for H1
             $h1_count = 0;
@@ -240,16 +240,16 @@ class WPSI_SEO_Checker {
             }
             
             if ($h1_count === 0) {
-                $issues[] = __('No H1 heading found. Add a main heading to improve SEO.', 'smart-insights-content-intelligence-ux-heatmap');
+                $issues[] = __('No H1 heading found. Add a main heading to improve SEO.', 'wp-smart-insights');
             } elseif ($h1_count > 1) {
-                $issues[] = __('Multiple H1 headings found. Use only one H1 per page.', 'smart-insights-content-intelligence-ux-heatmap');
+                $issues[] = __('Multiple H1 headings found. Use only one H1 per page.', 'wp-smart-insights');
             }
             
             // Check heading hierarchy
             $current_level = 0;
             foreach ($headings as $heading) {
                 if ($heading['level'] > $current_level + 1) {
-                    $issues[] = __('Heading hierarchy is broken. Don\'t skip heading levels.', 'smart-insights-content-intelligence-ux-heatmap');
+                    $issues[] = __('Heading hierarchy is broken. Don\'t skip heading levels.', 'wp-smart-insights');
                     break;
                 }
                 $current_level = $heading['level'];
@@ -270,7 +270,7 @@ class WPSI_SEO_Checker {
         $title = get_the_title($post_id);
         $meta_tags['title'] = array(
             'valid' => !empty($title) && strlen($title) <= 60,
-            'message' => !empty($title) ? (strlen($title) <= 60 ? __('Good length', 'smart-insights-content-intelligence-ux-heatmap') : __('Too long', 'smart-insights-content-intelligence-ux-heatmap')) : __('Missing', 'smart-insights-content-intelligence-ux-heatmap'),
+            'message' => !empty($title) ? (strlen($title) <= 60 ? __('Good length', 'wp-smart-insights') : __('Too long', 'wp-smart-insights')) : __('Missing', 'wp-smart-insights'),
             'value' => $title
         );
         
@@ -282,7 +282,7 @@ class WPSI_SEO_Checker {
         
         $meta_tags['description'] = array(
             'valid' => !empty($meta_description) && strlen($meta_description) >= 120 && strlen($meta_description) <= 160,
-            'message' => !empty($meta_description) ? (strlen($meta_description) >= 120 && strlen($meta_description) <= 160 ? __('Good length', 'smart-insights-content-intelligence-ux-heatmap') : __('Length issue', 'smart-insights-content-intelligence-ux-heatmap')) : __('Missing', 'smart-insights-content-intelligence-ux-heatmap'),
+            'message' => !empty($meta_description) ? (strlen($meta_description) >= 120 && strlen($meta_description) <= 160 ? __('Good length', 'wp-smart-insights') : __('Length issue', 'wp-smart-insights')) : __('Missing', 'wp-smart-insights'),
             'value' => $meta_description
         );
         
@@ -294,7 +294,7 @@ class WPSI_SEO_Checker {
         
         $meta_tags['focus_keyword'] = array(
             'valid' => !empty($focus_keyword),
-            'message' => !empty($focus_keyword) ? __('Set', 'smart-insights-content-intelligence-ux-heatmap') : __('Missing', 'smart-insights-content-intelligence-ux-heatmap'),
+            'message' => !empty($focus_keyword) ? __('Set', 'wp-smart-insights') : __('Missing', 'wp-smart-insights'),
             'value' => $focus_keyword
         );
         
@@ -311,7 +311,7 @@ class WPSI_SEO_Checker {
         
         foreach ($matches as $match) {
             $url = $match[1];
-            $text = strip_tags($match[2]);
+            $text = wp_strip_all_tags($match[2]);
             
             // Check if it's an internal link
             if (strpos($url, home_url()) === 0 || strpos($url, '/') === 0) {
@@ -421,7 +421,7 @@ class WPSI_SEO_Checker {
         if (isset($analysis['meta_tags']['description']) && !$analysis['meta_tags']['description']['valid']) {
             $fixes[] = array(
                 'action' => 'add_meta_description',
-                'label' => __('Add Meta Description', 'smart-insights-content-intelligence-ux-heatmap')
+                'label' => __('Add Meta Description', 'wp-smart-insights')
             );
         }
         
@@ -429,7 +429,7 @@ class WPSI_SEO_Checker {
         if (isset($analysis['meta_tags']['focus_keyword']) && !$analysis['meta_tags']['focus_keyword']['valid']) {
             $fixes[] = array(
                 'action' => 'add_focus_keyword',
-                'label' => __('Add Focus Keyword', 'smart-insights-content-intelligence-ux-heatmap')
+                'label' => __('Add Focus Keyword', 'wp-smart-insights')
             );
         }
         
@@ -437,7 +437,7 @@ class WPSI_SEO_Checker {
         if ($analysis['internal_links']['broken'] > 0) {
             $fixes[] = array(
                 'action' => 'fix_broken_links',
-                'label' => __('Fix Broken Links', 'smart-insights-content-intelligence-ux-heatmap')
+                'label' => __('Fix Broken Links', 'wp-smart-insights')
             );
         }
         
@@ -445,7 +445,7 @@ class WPSI_SEO_Checker {
         if ($analysis['images']['missing_alt'] > 0) {
             $fixes[] = array(
                 'action' => 'add_alt_text',
-                'label' => __('Add Alt Text to Images', 'smart-insights-content-intelligence-ux-heatmap')
+                'label' => __('Add Alt Text to Images', 'wp-smart-insights')
             );
         }
         

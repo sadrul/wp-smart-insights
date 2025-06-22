@@ -28,28 +28,26 @@ if ($selected_post_id > 0) {
 ?>
 
 <div class="wrap">
-    <h1><?php _e('Smart Insights - Content Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h1>
+    <h1><?php esc_html_e('Smart Insights - Content Analysis', 'wp-smart-insights'); ?></h1>
     
     <div class="wpsi-content-analysis-container">
         <!-- Post Selection -->
         <div class="wpsi-section">
-            <h2><?php _e('Select Content to Analyze', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+            <h2><?php esc_html_e('Select Content to Analyze', 'wp-smart-insights'); ?></h2>
             
             <form method="get" action="">
                 <input type="hidden" name="page" value="smart-insights-content-intelligence-ux-heatmap-content" />
                 <select name="post_id" id="wpsi-post-select">
-                    <option value=""><?php _e('-- Select a page or post --', 'smart-insights-content-intelligence-ux-heatmap'); ?></option>
+                    <option value=""><?php esc_html_e('-- Select a page or post --', 'wp-smart-insights'); ?></option>
                     <?php foreach ($posts_with_analysis as $post): ?>
                         <?php
                         $analysis = get_post_meta($post->ID, '_wpsi_content_analysis', true);
                         $score = is_array($analysis) ? ($analysis['overall_score'] ?? 0) : 0;
                         ?>
-                        <option value="<?php echo $post->ID; ?>" <?php selected($selected_post_id, $post->ID); ?>>
-                            <?php echo esc_html($post->post_title); ?> (Score: <?php echo $score; ?>/100)
-                        </option>
+                        <option value="<?php echo esc_attr($post->ID); ?>"><?php echo esc_html($post->post_title); ?> (<?php echo esc_html($score); ?>)</option>
                     <?php endforeach; ?>
                 </select>
-                <input type="submit" class="button" value="<?php _e('Load Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?>" />
+                <input type="submit" class="button" value="<?php esc_html_e('Load Analysis', 'wp-smart-insights'); ?>" />
             </form>
         </div>
         
@@ -61,7 +59,7 @@ if ($selected_post_id > 0) {
             
             <!-- Overall Score -->
             <div class="wpsi-section">
-                <h2><?php _e('Content Quality Score', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+                <h2><?php esc_html_e('Content Quality Score', 'wp-smart-insights'); ?></h2>
                 
                 <div class="wpsi-score-display">
                     <div class="wpsi-score-circle" data-score="<?php echo esc_attr($analysis['overall_score'] ?? 0); ?>">
@@ -70,9 +68,9 @@ if ($selected_post_id > 0) {
                     </div>
                     <div class="wpsi-score-details">
                         <h3><?php echo esc_html($selected_post->post_title); ?></h3>
-                        <p><?php _e('Last analyzed:', 'smart-insights-content-intelligence-ux-heatmap'); ?> <?php echo esc_html($analysis['timestamp'] ?? ''); ?></p>
+                        <p><?php esc_html_e('Last analyzed:', 'wp-smart-insights'); ?> <?php echo esc_html($analysis['timestamp'] ?? ''); ?></p>
                         <button type="button" class="button button-primary" id="wpsi-reanalyze-content">
-                            <?php _e('Re-analyze Content', 'smart-insights-content-intelligence-ux-heatmap'); ?>
+                            <?php esc_html_e('Re-analyze Content', 'wp-smart-insights'); ?>
                         </button>
                     </div>
                 </div>
@@ -80,27 +78,27 @@ if ($selected_post_id > 0) {
             
             <!-- Detailed Analysis -->
             <div class="wpsi-section">
-                <h2><?php _e('Detailed Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h2>
+                <h2><?php esc_html_e('Detailed Analysis', 'wp-smart-insights'); ?></h2>
                 
                 <div class="wpsi-analysis-grid">
                     <!-- Readability -->
                     <?php if (isset($analysis['readability'])): ?>
                         <div class="wpsi-analysis-card">
                             <div class="wpsi-analysis-header">
-                                <h3><?php _e('Readability', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                                <h3><?php esc_html_e('Readability', 'wp-smart-insights'); ?></h3>
                                 <div class="wpsi-score-badge"><?php echo esc_html($analysis['readability']['score']); ?>/100</div>
                             </div>
                             <div class="wpsi-analysis-content">
                                 <div class="wpsi-metric-bar">
                                     <div class="wpsi-metric-fill" style="width: <?php echo esc_attr($analysis['readability']['score']); ?>%"></div>
                                 </div>
-                                <p><strong><?php _e('Grade Level:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['readability']['grade']); ?></p>
-                                <p><strong><?php _e('Words:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['readability']['words']); ?></p>
-                                <p><strong><?php _e('Sentences:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['readability']['sentences']); ?></p>
+                                <p><strong><?php esc_html_e('Grade Level:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['readability']['grade']); ?></p>
+                                <p><strong><?php esc_html_e('Words:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['readability']['words']); ?></p>
+                                <p><strong><?php esc_html_e('Sentences:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['readability']['sentences']); ?></p>
                                 
                                 <?php if (!empty($analysis['readability']['suggestions'])): ?>
                                     <div class="wpsi-suggestions">
-                                        <h4><?php _e('Suggestions:', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                                        <h4><?php esc_html_e('Suggestions:', 'wp-smart-insights'); ?></h4>
                                         <ul>
                                             <?php foreach ($analysis['readability']['suggestions'] as $suggestion): ?>
                                                 <li><?php echo esc_html($suggestion); ?></li>
@@ -116,7 +114,7 @@ if ($selected_post_id > 0) {
                     <?php if (isset($analysis['sentiment'])): ?>
                         <div class="wpsi-analysis-card">
                             <div class="wpsi-analysis-header">
-                                <h3><?php _e('Sentiment', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                                <h3><?php esc_html_e('Sentiment', 'wp-smart-insights'); ?></h3>
                                 <div class="wpsi-score-badge"><?php echo esc_html($analysis['sentiment']['score']); ?>/100</div>
                             </div>
                             <div class="wpsi-analysis-content">
@@ -124,8 +122,8 @@ if ($selected_post_id > 0) {
                                     <?php echo esc_html($analysis['sentiment']['label']); ?>
                                 </div>
                                 <p><?php echo esc_html($analysis['sentiment']['description']); ?></p>
-                                <p><strong><?php _e('Positive Words:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['sentiment']['positive_words']); ?></p>
-                                <p><strong><?php _e('Negative Words:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['sentiment']['negative_words']); ?></p>
+                                <p><strong><?php esc_html_e('Positive Words:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['sentiment']['positive_words']); ?></p>
+                                <p><strong><?php esc_html_e('Negative Words:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['sentiment']['negative_words']); ?></p>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -134,7 +132,7 @@ if ($selected_post_id > 0) {
                     <?php if (isset($analysis['tone'])): ?>
                         <div class="wpsi-analysis-card">
                             <div class="wpsi-analysis-header">
-                                <h3><?php _e('Tone', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                                <h3><?php esc_html_e('Tone', 'wp-smart-insights'); ?></h3>
                             </div>
                             <div class="wpsi-analysis-content">
                                 <div class="wpsi-tone-tags">
@@ -150,14 +148,14 @@ if ($selected_post_id > 0) {
                     <?php if (isset($analysis['keywords'])): ?>
                         <div class="wpsi-analysis-card">
                             <div class="wpsi-analysis-header">
-                                <h3><?php _e('Keyword Analysis', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                                <h3><?php esc_html_e('Keyword Analysis', 'wp-smart-insights'); ?></h3>
                                 <div class="wpsi-score-badge"><?php echo esc_html($analysis['keywords']['score']); ?>/100</div>
                             </div>
                             <div class="wpsi-analysis-content">
-                                <p><strong><?php _e('Density:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['keywords']['density']); ?>%</p>
+                                <p><strong><?php esc_html_e('Density:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['keywords']['density']); ?>%</p>
                                 
                                 <div class="wpsi-keywords-list">
-                                    <h4><?php _e('Top Keywords:', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                                    <h4><?php esc_html_e('Top Keywords:', 'wp-smart-insights'); ?></h4>
                                     <?php foreach (array_slice($analysis['keywords']['top_keywords'], 0, 5) as $keyword => $count): ?>
                                         <div class="wpsi-keyword-item">
                                             <span class="wpsi-keyword-text"><?php echo esc_html($keyword); ?></span>
@@ -168,7 +166,7 @@ if ($selected_post_id > 0) {
                                 
                                 <?php if (!empty($analysis['keywords']['suggestions'])): ?>
                                     <div class="wpsi-suggestions">
-                                        <h4><?php _e('Suggestions:', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                                        <h4><?php esc_html_e('Suggestions:', 'wp-smart-insights'); ?></h4>
                                         <ul>
                                             <?php foreach ($analysis['keywords']['suggestions'] as $suggestion): ?>
                                                 <li><?php echo esc_html($suggestion); ?></li>
@@ -184,7 +182,7 @@ if ($selected_post_id > 0) {
                     <?php if (isset($analysis['repetition'])): ?>
                         <div class="wpsi-analysis-card">
                             <div class="wpsi-analysis-header">
-                                <h3><?php _e('Repetition & Fluff', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
+                                <h3><?php esc_html_e('Repetition & Fluff', 'wp-smart-insights'); ?></h3>
                                 <div class="wpsi-score-badge"><?php echo esc_html($analysis['repetition']['score']); ?>/100</div>
                             </div>
                             <div class="wpsi-analysis-content">
@@ -192,11 +190,11 @@ if ($selected_post_id > 0) {
                                     <div class="wpsi-metric-fill" style="width: <?php echo esc_attr($analysis['repetition']['score']); ?>%"></div>
                                 </div>
                                 <p><?php echo esc_html($analysis['repetition']['description']); ?></p>
-                                <p><strong><?php _e('Repetition Ratio:', 'smart-insights-content-intelligence-ux-heatmap'); ?></strong> <?php echo esc_html($analysis['repetition']['repetition_ratio']); ?></p>
+                                <p><strong><?php esc_html_e('Repetition Ratio:', 'wp-smart-insights'); ?></strong> <?php echo esc_html($analysis['repetition']['repetition_ratio']); ?></p>
                                 
                                 <?php if (!empty($analysis['repetition']['issues'])): ?>
                                     <div class="wpsi-suggestions">
-                                        <h4><?php _e('Issues:', 'smart-insights-content-intelligence-ux-heatmap'); ?></h4>
+                                        <h4><?php esc_html_e('Issues:', 'wp-smart-insights'); ?></h4>
                                         <ul>
                                             <?php foreach ($analysis['repetition']['issues'] as $issue): ?>
                                                 <li><?php echo esc_html($issue); ?></li>
@@ -214,10 +212,10 @@ if ($selected_post_id > 0) {
             <div class="wpsi-section">
                 <div class="wpsi-no-data">
                     <div class="wpsi-no-data-icon dashicons dashicons-edit"></div>
-                    <h3><?php _e('No Content Analysis Available', 'smart-insights-content-intelligence-ux-heatmap'); ?></h3>
-                    <p><?php _e('Select a page or post from the dropdown above to view content analysis. You can also analyze content directly from the post editor.', 'smart-insights-content-intelligence-ux-heatmap'); ?></p>
-                    <a href="<?php echo admin_url('edit.php'); ?>" class="button button-primary">
-                        <?php _e('Go to Posts', 'smart-insights-content-intelligence-ux-heatmap'); ?>
+                    <h3><?php esc_html_e('No Content Analysis Available', 'wp-smart-insights'); ?></h3>
+                    <p><?php esc_html_e('Select a page or post from the dropdown above to view content analysis. You can also analyze content directly from the post editor.', 'wp-smart-insights'); ?></p>
+                    <a href="<?php echo esc_url(admin_url('edit.php')); ?>" class="button button-primary">
+                        <?php esc_html_e('Go to Posts', 'wp-smart-insights'); ?>
                     </a>
                 </div>
             </div>
@@ -480,18 +478,18 @@ jQuery(document).ready(function($) {
         var button = $(this);
         var originalText = button.text();
         
-        button.prop('disabled', true).text('<?php _e('Analyzing...', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
+        button.prop('disabled', true).text('<?php esc_html_e('Analyzing...', 'wp-smart-insights'); ?>');
         
         $.post(ajaxurl, {
             action: 'wpsi_analyze_content',
-            nonce: '<?php echo wp_create_nonce('wpsi_nonce'); ?>',
-            post_id: <?php echo $selected_post_id ?: 0; ?>,
+            nonce: '<?php echo esc_js(wp_create_nonce('wpsi_analyze_content')); ?>',
+            post_id: <?php echo esc_js($selected_post_id ?: 0); ?>,
             content: '<?php echo esc_js($selected_post ? $selected_post->post_content : ''); ?>'
         }, function(response) {
             if (response.success) {
                 location.reload();
             } else {
-                alert('<?php _e('Analysis failed. Please try again.', 'smart-insights-content-intelligence-ux-heatmap'); ?>');
+                alert('<?php esc_html_e('Analysis failed. Please try again.', 'wp-smart-insights'); ?>');
                 button.prop('disabled', false).text(originalText);
             }
         });

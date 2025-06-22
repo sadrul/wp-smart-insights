@@ -102,7 +102,7 @@ class WPSI_Heatmap_Tracker {
                 }
                 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', '<?php echo admin_url('admin-ajax.php'); ?>', true);
+                xhr.open('POST', '<?php echo esc_url(admin_url('admin-ajax.php')); ?>', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4) {
@@ -111,7 +111,7 @@ class WPSI_Heatmap_Tracker {
                 };
                 
                 var data = 'action=wpsi_save_heatmap_data' +
-                          '&nonce=<?php echo wp_create_nonce('wpsi_frontend_nonce'); ?>' +
+                          '&nonce=<?php echo esc_js(wp_create_nonce('wpsi_frontend_nonce')); ?>' +
                           '&post_id=' + wpsiData.postId +
                           '&click_data=' + encodeURIComponent(JSON.stringify(wpsiData.clicks)) +
                           '&scroll_data=' + encodeURIComponent(JSON.stringify(wpsiData.scrolls)) +
@@ -134,10 +134,10 @@ class WPSI_Heatmap_Tracker {
         <div id="wpsi-heatmap-preview" style="display: none;">
             <div class="wpsi-heatmap-overlay">
                 <div class="wpsi-heatmap-controls">
-                    <button type="button" class="button" id="wpsi-show-clicks"><?php _e('Show Clicks', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-hovers"><?php _e('Show Hovers', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
-                    <button type="button" class="button" id="wpsi-show-scroll"><?php _e('Show Scroll Depth', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
-                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php _e('Clear', 'smart-insights-content-intelligence-ux-heatmap'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-clicks"><?php esc_html_e('Show Clicks', 'wp-smart-insights'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-hovers"><?php esc_html_e('Show Hovers', 'wp-smart-insights'); ?></button>
+                    <button type="button" class="button" id="wpsi-show-scroll"><?php esc_html_e('Show Scroll Depth', 'wp-smart-insights'); ?></button>
+                    <button type="button" class="button" id="wpsi-clear-heatmap"><?php esc_html_e('Clear', 'wp-smart-insights'); ?></button>
                 </div>
                 <canvas id="wpsi-heatmap-canvas"></canvas>
             </div>
@@ -198,7 +198,7 @@ class WPSI_Heatmap_Tracker {
             $('#wpsi-show-clicks').on('click', function() {
                 $.post(ajaxurl, {
                     action: 'wpsi_get_heatmap_data',
-                    nonce: '<?php echo wp_create_nonce('wpsi_nonce'); ?>',
+                    nonce: '<?php echo esc_js(wp_create_nonce('wpsi_nonce')); ?>',
                     post_id: $('#wpsi-post-select').val(),
                     type: 'clicks'
                 }, function(response) {
@@ -211,7 +211,7 @@ class WPSI_Heatmap_Tracker {
             $('#wpsi-show-hovers').on('click', function() {
                 $.post(ajaxurl, {
                     action: 'wpsi_get_heatmap_data',
-                    nonce: '<?php echo wp_create_nonce('wpsi_nonce'); ?>',
+                    nonce: '<?php echo esc_js(wp_create_nonce('wpsi_nonce')); ?>',
                     post_id: $('#wpsi-post-select').val(),
                     type: 'hovers'
                 }, function(response) {
@@ -224,7 +224,7 @@ class WPSI_Heatmap_Tracker {
             $('#wpsi-show-scroll').on('click', function() {
                 $.post(ajaxurl, {
                     action: 'wpsi_get_heatmap_data',
-                    nonce: '<?php echo wp_create_nonce('wpsi_nonce'); ?>',
+                    nonce: '<?php echo esc_js(wp_create_nonce('wpsi_nonce')); ?>',
                     post_id: $('#wpsi-post-select').val(),
                     type: 'scroll'
                 }, function(response) {
@@ -360,8 +360,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['avg_scroll_depth'] < 30) {
             $warnings[] = array(
                 'type' => 'warning',
-                'message' => __('Low scroll depth detected. Content may not be engaging enough.', 'smart-insights-content-intelligence-ux-heatmap'),
-                'suggestion' => __('Consider adding more engaging content or improving the introduction.', 'smart-insights-content-intelligence-ux-heatmap')
+                'message' => __('Low scroll depth detected. Content may not be engaging enough.', 'wp-smart-insights'),
+                'suggestion' => __('Consider adding more engaging content or improving the introduction.', 'wp-smart-insights')
             );
         }
         
@@ -369,8 +369,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['total_clicks'] < 5 && $stats['total_sessions'] > 10) {
             $warnings[] = array(
                 'type' => 'warning',
-                'message' => __('Low click engagement. CTAs may not be prominent enough.', 'smart-insights-content-intelligence-ux-heatmap'),
-                'suggestion' => __('Consider making call-to-action buttons more visible or compelling.', 'smart-insights-content-intelligence-ux-heatmap')
+                'message' => __('Low click engagement. CTAs may not be prominent enough.', 'wp-smart-insights'),
+                'suggestion' => __('Consider making call-to-action buttons more visible or compelling.', 'wp-smart-insights')
             );
         }
         
@@ -378,8 +378,8 @@ class WPSI_Heatmap_Tracker {
         if ($stats['avg_scroll_depth'] > 80 && $stats['total_clicks'] < 10) {
             $warnings[] = array(
                 'type' => 'info',
-                'message' => __('Users are scrolling but not clicking. Content may be too long.', 'smart-insights-content-intelligence-ux-heatmap'),
-                'suggestion' => __('Consider breaking content into shorter sections or adding more interactive elements.', 'smart-insights-content-intelligence-ux-heatmap')
+                'message' => __('Users are scrolling but not clicking. Content may be too long.', 'wp-smart-insights'),
+                'suggestion' => __('Consider breaking content into shorter sections or adding more interactive elements.', 'wp-smart-insights')
             );
         }
         
