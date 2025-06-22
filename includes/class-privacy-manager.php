@@ -182,14 +182,16 @@ class WPSI_Privacy_Manager {
     public function save_consent() {
         check_ajax_referer('wpsi_consent_nonce', 'nonce');
         
-        $accepted = intval($_POST['accepted']);
+        // Fix for PHP Fatal error: Cannot use isset() on the result of an expression
+        $accepted_raw = wp_unslash($_POST['accepted'] ?? '');
+        $accepted = intval($accepted_raw);
         
         // Store consent in database
         $consent_data = array(
             'accepted' => $accepted,
             'timestamp' => current_time('mysql'),
             'ip_address' => $this->get_client_ip(),
-            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? ''
+            'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : ''
         );
         
         // Store in options (you might want to use a more sophisticated storage method)
@@ -213,7 +215,9 @@ class WPSI_Privacy_Manager {
             wp_send_json_error('Insufficient permissions');
         }
         
-        $user_id = intval($_POST['user_id']);
+        // Fix for PHP Fatal error: Cannot use isset() on the result of an expression
+        $user_id_raw = wp_unslash($_POST['user_id'] ?? '');
+        $user_id = intval($user_id_raw);
         $user = get_user_by('id', $user_id);
         
         if (!$user) {
@@ -234,8 +238,8 @@ class WPSI_Privacy_Manager {
             'exported_by' => get_current_user_id()
         );
         
-        // Generate JSON file
-        $filename = 'wpsi-user-data-' . $user_id . '-' . date('Y-m-d-H-i-s') . '.json';
+        // Generate JSON file - Use gmdate instead of date
+        $filename = 'wpsi-user-data-' . $user_id . '-' . gmdate('Y-m-d-H-i-s') . '.json';
         $filepath = wp_upload_dir()['basedir'] . '/wpsi-exports/' . $filename;
         
         // Create directory if it doesn't exist
@@ -256,7 +260,9 @@ class WPSI_Privacy_Manager {
             wp_send_json_error('Insufficient permissions');
         }
         
-        $user_id = intval($_POST['user_id']);
+        // Fix for PHP Fatal error: Cannot use isset() on the result of an expression
+        $user_id_raw = wp_unslash($_POST['user_id'] ?? '');
+        $user_id = intval($user_id_raw);
         
         // Delete user consent data
         $consents = get_option('wpsi_user_consents', array());
@@ -298,14 +304,23 @@ class WPSI_Privacy_Manager {
             wp_send_json_error('Insufficient permissions');
         }
         
+        // Fix for PHP Fatal error: Cannot use isset() on the result of an expression
+        $privacy_compliant_raw = wp_unslash($_POST['privacy_compliant'] ?? '');
+        $cookie_consent_raw = wp_unslash($_POST['cookie_consent'] ?? '');
+        $data_retention_days_raw = wp_unslash($_POST['data_retention_days'] ?? '');
+        $anonymize_ip_raw = wp_unslash($_POST['anonymize_ip'] ?? '');
+        $respect_dnt_raw = wp_unslash($_POST['respect_dnt'] ?? '');
+        $privacy_policy_url_raw = wp_unslash($_POST['privacy_policy_url'] ?? '');
+        $data_processing_basis_raw = wp_unslash($_POST['data_processing_basis'] ?? '');
+        
         $settings = array(
-            'wpsi_privacy_compliant' => boolval($_POST['privacy_compliant']),
-            'wpsi_cookie_consent' => boolval($_POST['cookie_consent']),
-            'wpsi_data_retention_days' => intval($_POST['data_retention_days']),
-            'wpsi_anonymize_ip' => boolval($_POST['anonymize_ip']),
-            'wpsi_respect_dnt' => boolval($_POST['respect_dnt']),
-            'wpsi_privacy_policy_url' => esc_url_raw($_POST['privacy_policy_url']),
-            'wpsi_data_processing_basis' => sanitize_text_field($_POST['data_processing_basis'])
+            'wpsi_privacy_compliant' => boolval($privacy_compliant_raw),
+            'wpsi_cookie_consent' => boolval($cookie_consent_raw),
+            'wpsi_data_retention_days' => intval($data_retention_days_raw),
+            'wpsi_anonymize_ip' => boolval($anonymize_ip_raw),
+            'wpsi_respect_dnt' => boolval($respect_dnt_raw),
+            'wpsi_privacy_policy_url' => esc_url_raw($privacy_policy_url_raw),
+            'wpsi_data_processing_basis' => sanitize_text_field($data_processing_basis_raw)
         );
         
         foreach ($settings as $key => $value) {
@@ -371,7 +386,7 @@ class WPSI_Privacy_Manager {
     
     public function cleanup_expired_data() {
         $retention_days = get_option('wpsi_data_retention_days', 365);
-        $cutoff_date = date('Y-m-d H:i:s', strtotime("-{$retention_days} days"));
+        $cutoff_date = gmdate('Y-m-d H:i:s', strtotime("-{$retention_days} days"));
         
         // Clean up old consent data
         $consents = get_option('wpsi_user_consents', array());
@@ -422,7 +437,8 @@ class WPSI_Privacy_Manager {
         
         foreach ($ip_keys as $key) {
             if (array_key_exists($key, $_SERVER) === true) {
-                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                $server_value = wp_unslash($_SERVER[$key]);
+                foreach (explode(',', $server_value) as $ip) {
                     $ip = trim($ip);
                     if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
                         return $ip;
@@ -431,7 +447,7 @@ class WPSI_Privacy_Manager {
             }
         }
         
-        return $_SERVER['REMOTE_ADDR'] ?? '';
+        return isset($_SERVER['REMOTE_ADDR']) ? wp_unslash($_SERVER['REMOTE_ADDR']) : '';
     }
     
     private function has_dnt_header() {

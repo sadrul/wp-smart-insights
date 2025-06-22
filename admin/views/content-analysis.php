@@ -19,11 +19,15 @@ $posts_with_analysis = get_posts(array(
     )
 ));
 
-$selected_post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
+$selected_post_id = 0;
 $selected_post = null;
 
-if ($selected_post_id > 0) {
-    $selected_post = get_post($selected_post_id);
+// Verify nonce for GET request
+if (isset($_GET['wpsi_nonce']) && wp_verify_nonce($_GET['wpsi_nonce'], 'wpsi_content_analysis_nonce')) {
+    $selected_post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
+    if ($selected_post_id > 0) {
+        $selected_post = get_post($selected_post_id);
+    }
 }
 ?>
 
@@ -36,6 +40,7 @@ if ($selected_post_id > 0) {
             <h2><?php esc_html_e('Select Content to Analyze', 'wp-smart-insights'); ?></h2>
             
             <form method="get" action="">
+                <?php wp_nonce_field('wpsi_content_analysis_nonce', 'wpsi_nonce'); ?>
                 <input type="hidden" name="page" value="smart-insights-content-intelligence-ux-heatmap-content" />
                 <select name="post_id" id="wpsi-post-select">
                     <option value=""><?php esc_html_e('-- Select a page or post --', 'wp-smart-insights'); ?></option>
